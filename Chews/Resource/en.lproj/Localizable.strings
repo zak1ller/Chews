@@ -1,0 +1,12 @@
+"HomeViewTopicTitle" = "What problem are you worried about?\nPlease write freely.";
+"HomeViewContentTitle" = "Write";
+"NextButton" = "Next";
+"AddViewShortTopicMessage" = "The topic is too short.\nPlease enter at least one character.";
+"AddViewLongTopicMessage" = "The topic is too long.\nPlease enter 50 characters or less.";
+"AlertTitle" = "Alert";
+"ConfirmButton" = "Confirm";
+"GoodPointMessage" = "First, list the good points.";
+"ContentTooShort" = "The content is too short.\nPlease enter at least one character.";
+"WriteViewTopicTitle" = "Topic";
+"WriteViewTopicExample" = "Ex) Should I go on a diet?";
+"GoodPointsEmptyMessage" = "Please enter at least one good point.";

@@ -11,7 +11,10 @@ import SwiftUI
 struct ChewsApp: App {
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      HomeView()
+        .onAppear {
+          UINavigationBar.appearance().tintColor = UIColor.black
+        }
     }
   }
 }

@@ -1,0 +1,12 @@
+"HomeViewTopicTitle" = "오늘의 고민 주제는 무엇인가요?\n자유롭게 작성해 보세요.";
+"HomeViewContentTitle" = "작성하러가기";
+"NextButton" = "다음";
+"AddViewShortTopicMessage" = "주제가 너무 짧아요.\n한 글자 이상 입력해주세요.";
+"AddViewLongTopicMessage" = "주제가 너무 길어요.\n50자 이내로 입력해주세요.";
+"AlertTitle" = "알림";
+"ConfirmButton" = "확인";
+"GoodPointMessage" = "먼저, 좋은점을 나열해 보세요.";
+"ContentTooShort" = "내용이 너무 짧아요.\n한 글자 이상 입력해주세요.";
+"WriteViewTopicTitle" = "주제";
+"WriteViewTopicExample" = "예) 다이어트를 해야하나?";
+"GoodPointsEmptyMessage" = "좋은점을 하나 이상 입력해주세요.";

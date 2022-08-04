@@ -7,18 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		710744872897AB1700609041 /* WriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710744862897AB1700609041 /* WriteView.swift */; };
+		710744892897BA9000609041 /* GoodPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710744882897BA9000609041 /* GoodPointView.swift */; };
+		7120BB8E289B9349004095ED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7120BB90289B9349004095ED /* InfoPlist.strings */; };
+		7120BB93289B97BA004095ED /* TypeFieldViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7120BB92289B97BA004095ED /* TypeFieldViewModifier.swift */; };
+		7120BB95289B99F3004095ED /* GoodPointRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7120BB94289B99F3004095ED /* GoodPointRow.swift */; };
 		71E2327D2896EC34003DCD0B /* ChewsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E2327C2896EC34003DCD0B /* ChewsApp.swift */; };
-		71E2327F2896EC34003DCD0B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E2327E2896EC34003DCD0B /* ContentView.swift */; };
+		71E2327F2896EC34003DCD0B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E2327E2896EC34003DCD0B /* HomeView.swift */; };
 		71E232812896EC37003DCD0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71E232802896EC37003DCD0B /* Assets.xcassets */; };
 		71E232842896EC37003DCD0B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71E232832896EC37003DCD0B /* Preview Assets.xcassets */; };
+		71E232942896EEFD003DCD0B /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E232932896EEFD003DCD0B /* ColorExtension.swift */; };
+		71E23296289718B9003DCD0B /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E23295289718B9003DCD0B /* StringExtension.swift */; };
+		71E2329928971929003DCD0B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71E2329B28971929003DCD0B /* Localizable.strings */; };
+		71E2329E28971D1A003DCD0B /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E2329D28971D1A003DCD0B /* BigButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		710744862897AB1700609041 /* WriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteView.swift; sourceTree = "<group>"; };
+		710744882897BA9000609041 /* GoodPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodPointView.swift; sourceTree = "<group>"; };
+		7120BB8F289B9349004095ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7120BB91289B934A004095ED /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7120BB92289B97BA004095ED /* TypeFieldViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeFieldViewModifier.swift; sourceTree = "<group>"; };
+		7120BB94289B99F3004095ED /* GoodPointRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodPointRow.swift; sourceTree = "<group>"; };
 		71E232792896EC34003DCD0B /* Chews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71E2327C2896EC34003DCD0B /* ChewsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChewsApp.swift; sourceTree = "<group>"; };
-		71E2327E2896EC34003DCD0B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		71E2327E2896EC34003DCD0B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		71E232802896EC37003DCD0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71E232832896EC37003DCD0B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		71E232932896EEFD003DCD0B /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		71E23295289718B9003DCD0B /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		71E2329A28971929003DCD0B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		71E2329C28971957003DCD0B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		71E2329D28971D1A003DCD0B /* BigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +52,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		710744852897AAF700609041 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				71E2327E2896EC34003DCD0B /* HomeView.swift */,
+				710744862897AB1700609041 /* WriteView.swift */,
+				710744882897BA9000609041 /* GoodPointView.swift */,
+				7120BB94289B99F3004095ED /* GoodPointRow.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		71E232702896EC34003DCD0B = {
 			isa = PBXGroup;
 			children = (
@@ -69,7 +100,7 @@
 		71E2328A2896EC94003DCD0B /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				71E2327E2896EC34003DCD0B /* ContentView.swift */,
+				710744852897AAF700609041 /* Home */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -88,6 +119,8 @@
 		71E2328C2896ECB9003DCD0B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				71E232932896EEFD003DCD0B /* ColorExtension.swift */,
+				71E23295289718B9003DCD0B /* StringExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -102,6 +135,7 @@
 		71E2328E2896ED0E003DCD0B /* Custom View */ = {
 			isa = PBXGroup;
 			children = (
+				71E2329D28971D1A003DCD0B /* BigButton.swift */,
 			);
 			path = "Custom View";
 			sourceTree = "<group>";
@@ -109,6 +143,7 @@
 		71E2328F2896ED15003DCD0B /* View Modifier */ = {
 			isa = PBXGroup;
 			children = (
+				7120BB92289B97BA004095ED /* TypeFieldViewModifier.swift */,
 			);
 			path = "View Modifier";
 			sourceTree = "<group>";
@@ -117,6 +152,8 @@
 			isa = PBXGroup;
 			children = (
 				71E232802896EC37003DCD0B /* Assets.xcassets */,
+				71E2329B28971929003DCD0B /* Localizable.strings */,
+				7120BB90289B9349004095ED /* InfoPlist.strings */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -181,6 +218,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 71E232702896EC34003DCD0B;
 			productRefGroup = 71E2327A2896EC34003DCD0B /* Products */;
@@ -198,6 +236,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				71E232842896EC37003DCD0B /* Preview Assets.xcassets in Resources */,
+				7120BB8E289B9349004095ED /* InfoPlist.strings in Resources */,
+				71E2329928971929003DCD0B /* Localizable.strings in Resources */,
 				71E232812896EC37003DCD0B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,18 +249,47 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71E2327F2896EC34003DCD0B /* ContentView.swift in Sources */,
+				71E23296289718B9003DCD0B /* StringExtension.swift in Sources */,
+				710744892897BA9000609041 /* GoodPointView.swift in Sources */,
+				71E232942896EEFD003DCD0B /* ColorExtension.swift in Sources */,
+				710744872897AB1700609041 /* WriteView.swift in Sources */,
+				71E2327F2896EC34003DCD0B /* HomeView.swift in Sources */,
+				71E2329E28971D1A003DCD0B /* BigButton.swift in Sources */,
 				71E2327D2896EC34003DCD0B /* ChewsApp.swift in Sources */,
+				7120BB95289B99F3004095ED /* GoodPointRow.swift in Sources */,
+				7120BB93289B97BA004095ED /* TypeFieldViewModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7120BB90289B9349004095ED /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7120BB8F289B9349004095ED /* en */,
+				7120BB91289B934A004095ED /* ko */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		71E2329B28971929003DCD0B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				71E2329A28971929003DCD0B /* en */,
+				71E2329C28971957003DCD0B /* ko */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		71E232852896EC37003DCD0B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -267,7 +336,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -281,6 +350,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -321,7 +391,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
