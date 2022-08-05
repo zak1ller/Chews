@@ -14,6 +14,7 @@ struct TypeFieldViewModifier: ViewModifier {
       .textFieldStyle(.plain)
       .multilineTextAlignment(.center)
       .frame(height: 48)
+      .foregroundColor(.appPointColor)
       .background(Color.appBackgroundSubColor)
       .cornerRadius(4)
       .font(.system(size: 14))

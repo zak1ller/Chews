@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct GoodPointRow: View {
-  let goodPoint: String
+struct PointRow: View {
+  let point: String
   let deleteButtonTappedAction: (() -> ())?
   
   var body: some View {
@@ -34,15 +34,14 @@ struct GoodPointRow: View {
     .listRowSeparator(.hidden)
     .listRowInsets(EdgeInsets())
     .fixedSize(horizontal: false, vertical: true)
-//    .background(Color.appBackgroundSubColor)
     .cornerRadius(4)
     .padding(.bottom, 2)
   }
 }
 
-extension GoodPointRow {
+extension PointRow {
   var contentText: some View {
-    Text(goodPoint)
+    Text(point)
       .font(.system(size: 14, weight: .medium))
       .foregroundColor(.appTextColor)
       .padding(.leading, 16)

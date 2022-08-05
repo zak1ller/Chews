@@ -23,11 +23,11 @@ struct BigButton: View {
     }) {
       Text(buttonTitle)
         .font(.system(size: 14, weight: .medium))
-        .foregroundColor(.appBackgroundColor)
+        .foregroundColor(.appPointColor)
         .frame(maxWidth: .infinity)
         .frame(height: 48)
     }
-    .background(Color.appPointColor)
+    .background(Color.appBackgroundSubColor)
     .cornerRadius(4)
     .clipped()
   }

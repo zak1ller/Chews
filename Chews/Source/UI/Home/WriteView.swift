@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct WriteView: View {
+  @Binding var firstViewActive: Bool
   @FocusState private var focused: Bool
   @State private var topic = ""
   @State private var errorMessage = ""
@@ -27,11 +28,14 @@ struct WriteView: View {
     }
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
-        NavigationLink(destination: GoodPointView(topic: topic), isActive: $showingGoodPointView) {
+        NavigationLink(destination: GoodPointView(topic: topic,
+                                                  firstViewActive: $firstViewActive),
+                       isActive: $showingGoodPointView) {
           Button(action: {
             next()
           }) {
             Text("NextButton".localized())
+              .foregroundColor(.appPointColor)
           }
         }
       }

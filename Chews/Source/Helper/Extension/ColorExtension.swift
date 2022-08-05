@@ -8,11 +8,12 @@
 import SwiftUI
 
 extension Color {
-  static let appBackgroundColor = Color(hex: "#FFFFFF")
-  static let appBackgroundSubColor = Color(hex: "#F0F3F4")
-  static let appPointColor = Color(hex: "#000000")
-  static let appTextColor = Color(hex: "#212121")
-  static let appTextSubColor = Color(hex: "#CACFD2")
+  static let appBackgroundColor = Color(hex: "#000000")
+  static let appBackgroundSubColor = Color(hex: "#212121")
+  static let appPointColor = Color(hex: "#FFFFFF")
+  static let appTextColor = Color(hex: "#E0E0E0")
+  static let appTextSubColor = Color(hex: "#9E9E9E")
+  static let appDividerColor = Color(hex: "#424242")
 }
 
 extension Color {
@@ -27,5 +28,11 @@ extension Color {
     let g = Double((rgb >>  8) & 0xFF) / 255.0
     let b = Double((rgb >>  0) & 0xFF) / 255.0
     self.init(red: r, green: g, blue: b)
+  }
+}
+
+extension Color {
+  var uiColor: UIColor? {
+    return UIColor(self)
   }
 }

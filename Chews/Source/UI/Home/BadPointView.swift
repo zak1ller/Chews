@@ -1,29 +1,30 @@
 //
-//  GoodPointView.swift
+//  BadPointView.swift
 //  Chews
 //
-//  Created by Min-Su Kim on 2022/08/01.
+//  Created by Min-Su Kim on 2022/08/05.
 //
 
 import Foundation
 import SwiftUI
 
-struct GoodPointView: View {
+struct BadPointView: View {
   var topic: String
+  var goodPoints: [String]
   @Binding var firstViewActive: Bool
-  @FocusState private var focused: Bool
   @State var latestCount = 0
-  @State private var goodPointValue = ""
+  @State private var badPointValue = ""
+  @State private var badPoints: [String] = []
   @State private var errorMessage = ""
   @State private var showingErrorMessage = false
-  @State private var showingBadPointView = false
-  @State private var goodPoints: [String] = []
+  @State private var showingResultView = false
+  @FocusState private var focused: Bool
   
   var body: some View {
     VStack {
       Spacer().frame(height: 24)
-      goodPointLabel
-      goodPointTextField
+      badPointLabel
+      badPointTextField
       Spacer().frame(height: 16)
       listView
       Spacer()
@@ -37,10 +38,11 @@ struct GoodPointView: View {
     }
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
-        NavigationLink(destination: BadPointView(topic: topic,
-                                                 goodPoints: goodPoints,
-                                                 firstViewActive: $firstViewActive),
-                       isActive: $showingBadPointView) {
+        NavigationLink(destination: ResultView(topic: topic,
+                                               firstViewActive: $firstViewActive,
+                                               goodPoints: goodPoints,
+                                               badPoints: badPoints),
+                       isActive: $showingResultView) {
           Button(action: {
             next()
           }) {
@@ -61,15 +63,15 @@ struct GoodPointView: View {
   }
 }
 
-extension GoodPointView {
-  var goodPointLabel: some View {
-    Text("GoodPointMessage".localized())
+extension BadPointView {
+  var badPointLabel: some View {
+    Text("BadPointMessage".localized())
       .foregroundColor(.appTextColor)
       .multilineTextAlignment(.center)
   }
   
-  var goodPointTextField: some View {
-    TextField(topic, text: $goodPointValue, onCommit: {
+  var badPointTextField: some View {
+    TextField(topic, text: $badPointValue, onCommit: {
       enter()
     })
     .focused($focused)
@@ -80,14 +82,14 @@ extension GoodPointView {
     ScrollViewReader{ proxy in
       ScrollView(.vertical, showsIndicators: false) {
         VStack {
-          ForEach(0..<goodPoints.count, id: \.self) { i in
-            PointRow(point: "\(self.goodPoints[i])") {
-              self.goodPoints.remove(at: i)
+          ForEach(0..<badPoints.count, id: \.self) { i in
+            PointRow(point: "\(self.badPoints[i])") {
+              self.badPoints.remove(at: i)
             }
             .id(i)
           }
         }
-        .onChange(of: goodPoints.count) { count in
+        .onChange(of: badPoints.count) { count in
           if latestCount < count {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
               withAnimation {
@@ -102,24 +104,24 @@ extension GoodPointView {
   }
 }
 
-extension GoodPointView {
+extension BadPointView {
   func enter() {
-    if goodPointValue.count == 0 {
+    if badPointValue.count == 0 {
       errorMessage = "ContentTooShort".localized()
       showingErrorMessage = true
     } else {
-      goodPoints.append(goodPointValue)
-      goodPointValue = ""
+      badPoints.append(badPointValue)
+      badPointValue = ""
       focused = true
     }
   }
   
   func next() {
-    if goodPoints.isEmpty {
-      errorMessage = "GoodPointsEmptyMessage".localized()
+    if badPoints.isEmpty {
+      errorMessage = "BadPointEmptyMessage".localized()
       showingErrorMessage = true
     } else {
-      showingBadPointView = true
+      showingResultView = true
     }
   }
 }
