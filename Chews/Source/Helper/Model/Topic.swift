@@ -20,6 +20,34 @@ final class Topic: Object {
 extension Topic: Identifiable {}
 
 extension Topic {
+  static func deleteGootPoint(topic: Topic, goodPoint: String) {
+    var i = 0
+    for value in topic.goodPoints {
+      if value == goodPoint {
+        break
+      }
+      i += 1
+    }
+    
+    try! Realm().write {
+      topic.goodPoints.remove(at: i)
+    }
+  }
+  
+  static func deleteBadPoint(topic: Topic, badPoint: String) {
+    var i = 0
+    for value in topic.badPoints {
+      if value == badPoint {
+        break
+      }
+      i += 1
+    }
+    
+    try! Realm().write {
+      topic.badPoints.remove(at: i)
+    }
+  }
+  
   static func add(topic: String, goodPoints: [String], badPoints: [String]) {
     let data = Topic()
     data.topic = topic

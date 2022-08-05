@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Introspect
 
 struct WriteView: View {
   @Binding var firstViewActive: Bool
@@ -15,21 +16,30 @@ struct WriteView: View {
   @State private var errorMessage = ""
   @State private var showingErrorMessage = false
   @State private var showingGoodPointView = false
+  @State private var uiTabarController: UITabBarController?
   
   var body: some View {
     VStack(alignment: .center) {
       topicLabel
       topicTextField
     }
+    .introspectTabBarController { (UITabBarController) in
+      uiTabarController = UITabBarController
+    }
     .onAppear {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
         self.focused = true
+        self.uiTabarController?.tabBar.isHidden = true
       })
+    }
+    .onDisappear {
+      uiTabarController?.tabBar.isHidden = false
     }
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         NavigationLink(destination: GoodPointView(topic: topic,
-                                                  firstViewActive: $firstViewActive),
+                                                  firstViewActive: $firstViewActive,
+                                                  uiTabarController: $uiTabarController),
                        isActive: $showingGoodPointView) {
           Button(action: {
             next()

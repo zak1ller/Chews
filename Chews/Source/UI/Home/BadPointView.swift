@@ -12,6 +12,7 @@ struct BadPointView: View {
   var topic: String
   var goodPoints: [String]
   @Binding var firstViewActive: Bool
+  @Binding var uiTabarController: UITabBarController?
   @State var latestCount = 0
   @State private var badPointValue = ""
   @State private var badPoints: [String] = []
@@ -32,14 +33,16 @@ struct BadPointView: View {
     .padding(.leading, 16)
     .padding(.trailing, 16)
     .onAppear {
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
         self.focused = true
-      })
+        self.uiTabarController?.tabBar.isHidden = true
+      }
     }
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         NavigationLink(destination: ResultView(topic: topic,
                                                firstViewActive: $firstViewActive,
+                                               uiTabarController: $uiTabarController,
                                                goodPoints: goodPoints,
                                                badPoints: badPoints),
                        isActive: $showingResultView) {

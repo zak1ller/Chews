@@ -7,10 +7,12 @@
 
 import Foundation
 import SwiftUI
+import Introspect
 
 struct GoodPointView: View {
   var topic: String
   @Binding var firstViewActive: Bool
+  @Binding var uiTabarController: UITabBarController?
   @FocusState private var focused: Bool
   @State var latestCount = 0
   @State private var goodPointValue = ""
@@ -31,15 +33,20 @@ struct GoodPointView: View {
     .padding(.leading, 16)
     .padding(.trailing, 16)
     .onAppear {
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
         self.focused = true
-      })
+        self.uiTabarController?.tabBar.isHidden = true
+      }
+    }
+    .onDisappear {
+      self.uiTabarController?.tabBar.isHidden = false
     }
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         NavigationLink(destination: BadPointView(topic: topic,
                                                  goodPoints: goodPoints,
-                                                 firstViewActive: $firstViewActive),
+                                                 firstViewActive: $firstViewActive,
+                                                 uiTabarController: $uiTabarController),
                        isActive: $showingBadPointView) {
           Button(action: {
             next()

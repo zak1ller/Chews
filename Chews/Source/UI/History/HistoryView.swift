@@ -12,6 +12,7 @@ struct HistoryView: View {
   @State private var topics: [Topic] = []
   @State private var showingDetail = false
   @State private var selectedTopic: Topic = Topic()
+  @State private var selectedIndex: Int = 0
   
   var body: some View {
     NavigationView {
@@ -38,7 +39,9 @@ extension HistoryView {
             openDetailView(topic: topic)
           }
       }
-      NavigationLink(destination: DetailView(topic: $selectedTopic,
+      NavigationLink(destination: DetailView(
+        topic: $selectedTopic,
+        topics: $topics,
                                              activeDetailView: $showingDetail),
                      isActive: $showingDetail) {
         

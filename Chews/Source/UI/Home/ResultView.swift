@@ -11,6 +11,7 @@ import SwiftUI
 struct ResultView: View {
   var topic: String
   @Binding var firstViewActive: Bool
+  @Binding var uiTabarController: UITabBarController?
   @State var goodPoints: [String]
   @State var badPoints: [String]
   @State var showingFinishAlert = false
@@ -23,6 +24,14 @@ struct ResultView: View {
       topicLabel
       Spacer().frame(height: 24)
       listView
+    }
+    .onAppear {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+        uiTabarController?.tabBar.isHidden = true
+      }
+    }
+    .onDisappear {
+      uiTabarController?.tabBar.isHidden = false
     }
     .edgesIgnoringSafeArea(.bottom)
     .toolbar {

@@ -13,29 +13,33 @@ struct ResultRow: View {
   let point: String
   
   var body: some View {
-    HStack {
-      contentText
-      Spacer()
+    VStack {
+      Spacer().frame(height: 16)
+      HStack {
+        contentText
+        Spacer()
+      }
+      Spacer().frame(height: 16)
     }
+    .background(Color.appBackgroundSubColor)
     .listRowSeparator(.hidden)
     .listRowInsets(EdgeInsets())
     .fixedSize(horizontal: false, vertical: true)
     .cornerRadius(4)
+    .padding(.bottom, 16)
+    .padding(.leading, 16)
+    .padding(.trailing, 16)
   }
 }
 
 extension ResultRow {
   var contentText: some View {
     HStack {
-      Text("\(index + 1). ")
-        .font(.system(size: 14, weight: .regular))
-        .foregroundColor(.appTextSubColor) +
       Text(point)
         .font(.system(size: 14, weight: .regular))
         .foregroundColor(.appTextColor)
     }
     .padding(.leading, 16)
     .padding(.trailing, 16)
-    .padding(.bottom, 8)
   }
 }

@@ -7,10 +7,15 @@
 
 import Foundation
 import SwiftUI
+import Introspect
+import RealmSwift
 
 struct DetailView: View {
   @Binding var topic: Topic
+  @Binding var topics: [Topic]
   @Binding var activeDetailView: Bool
+  @State private var uiTabarController: UITabBarController?
+  @State private var deleteGoodPoint = ""
   
   var body: some View {
     VStack {
@@ -18,6 +23,12 @@ struct DetailView: View {
       topicLabel
       Spacer().frame(height: 24)
       listView
+    }
+    .introspectTabBarController { (UITabBarController) in
+      UITabBarController.tabBar.isHidden = true
+      uiTabarController = UITabBarController
+    }.onDisappear{
+      uiTabarController?.tabBar.isHidden = false
     }
     .navigationBarTitleDisplayMode(.inline)
     .edgesIgnoringSafeArea(.bottom)
@@ -48,7 +59,6 @@ extension DetailView {
     ZStack {
       HStack {
         ScrollView {
-          Spacer().frame(height: 16)
           HStack {
             Spacer().frame(width: 16)
             Text("GoodPoints".localized())
@@ -56,13 +66,25 @@ extension DetailView {
             Spacer()
           }
           Spacer().frame(height: 16)
-          ForEach(0..<topic.goodPoints.count, id: \.self) { i in
-            ResultRow(index: i, point: self.topic.goodPoints[i])
+          ForEach(topic.goodPoints, id: \.self) { goodPoint in
+            ResultRow(index: 0, point: goodPoint)
+              .contextMenu {
+                Button(action: {
+                  
+                }, label: {
+                  Label("EditButton".localized(), systemImage: "square.and.pencil")
+                })
+                Button(action: {
+                  self.deleteGoodPoint = goodPoint
+                  self.deleteGoodPoint(goodPoint)
+                }, label: {
+                  Label("DeleteButton".localized(), systemImage: "minus.circle")
+                })
+              }
           }
           Spacer().frame(height: 24)
         }
         ScrollView {
-          Spacer().frame(height: 16)
           HStack {
             Spacer().frame(width: 16)
             Text("BadPoints".localized())
@@ -70,13 +92,24 @@ extension DetailView {
             Spacer()
           }
           Spacer().frame(height: 16)
-          ForEach(0..<topic.badPoints.count, id: \.self) { i in
-            ResultRow(index:  i, point: self.topic.badPoints[i])
+          ForEach(topic.badPoints, id: \.self) { badPoint in
+            ResultRow(index: 0, point: badPoint)
+              .contextMenu {
+                Button(action: {
+                  
+                }, label: {
+                  Label("EditButton".localized(), systemImage: "square.and.pencil")
+                })
+                Button(action: {
+                  self.deleteBadPoint(badPoint)
+                }, label: {
+                  Label("DeleteButton".localized(), systemImage: "minus.circle")
+                })
+              }
           }
           Spacer().frame(height: 24)
         }
       }
-      .background(Color.appBackgroundSubColor)
       .cornerRadius(4)
       HStack {
         Spacer()
@@ -92,6 +125,17 @@ extension DetailView {
 extension DetailView {
   func delete() {
     Topic.delete(topic: topic)
+    topics = Topic.get()
     activeDetailView = false
+  }
+  
+  func deleteGoodPoint(_ goodPoint: String) {
+    Topic.deleteGootPoint(topic: topic, goodPoint: goodPoint)
+    topics = Topic.get()
+  }
+  
+  func deleteBadPoint(_ badPoint: String) {
+    Topic.deleteBadPoint(topic: topic, badPoint: badPoint)
+    topics = Topic.get()
   }
 }
