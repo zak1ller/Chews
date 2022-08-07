@@ -13,8 +13,8 @@
 "BadPointMessage" = "Now list the bad points.";
 "BadPointEmptyMessage" = "Please enter at least one bad point.";
 "ResultViewTitle" = "Now compare the good points\nand the bad points.";
-"GoodPoints" = "Good Points";
-"BadPoints" = "Bad Points";
+"GoodPoints" = "Good";
+"BadPoints" = "Bad";
 "FinishButton" = "Finish";
 "ResultViewFinishAlertMessage" = "Would you like to save this?";
 "ResultViewFinishAlertTrueButton" = "Save and exit";
@@ -25,3 +25,8 @@
 "DeleteButton" = "Delete";
 "EditButton" = "Edit";
 "SaveButton" = "Save";
+"AddButton" = "Add";
+"EditTitle" = "Edit";
+"WriteTitle" = "Write";
+"AddTitle" = "Add";
+"DoneButton" = "Done";

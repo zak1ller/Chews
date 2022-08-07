@@ -78,23 +78,36 @@ extension ResultView {
     ZStack {
       HStack {
         ScrollView {
-          HStack {
+          HStack(alignment: .center) {
             Spacer().frame(width: 16)
             Text("GoodPoints".localized())
               .foregroundColor(.appTextSubColor)
             Spacer()
+            ZStack {
+              Button(action: {
+                print("123")
+              }) {
+                HStack {
+                  Spacer()
+                  Image(systemName: "plus.circle.fill")
+                    .foregroundColor(.appTextSubColor)
+                }
+              }
+              .frame(width: 32, height: 32)
+            }
+            Spacer().frame(width: 16)
           }
           Spacer().frame(height: 16)
           ForEach(0..<goodPoints.count, id: \.self) { i in
             TopicRow(point: self.goodPoints[i])
               .contextMenu {
                 Button(action: {
-                  self.editGoodPoint(i: i)
+                  self.edit(i, pointType: .good)
                 }, label: {
                   Label("EditButton".localized(), systemImage: "square.and.pencil")
                 })
                 Button(action: {
-                  self.deleteGoodPoint(i: i)
+                  self.delete(i, pointType: .good)
                 }, label: {
                   Label("DeleteButton".localized(), systemImage: "minus.circle")
                 })
@@ -103,23 +116,36 @@ extension ResultView {
           Spacer().frame(height: 24)
         }
         ScrollView {
-          HStack {
+          HStack(alignment: .center) {
             Spacer().frame(width: 16)
             Text("BadPoints".localized())
               .foregroundColor(.appTextSubColor)
             Spacer()
+            ZStack {
+              Button(action: {
+                print("123")
+              }) {
+                HStack {
+                  Spacer()
+                  Image(systemName: "plus.circle.fill")
+                    .foregroundColor(.appTextSubColor)
+                }
+              }
+              .frame(width: 32, height: 32)
+            }
+            Spacer().frame(width: 16)
           }
           Spacer().frame(height: 16)
           ForEach(0..<badPoints.count, id: \.self) { i in
             TopicRow(point: self.badPoints[i])
               .contextMenu {
                 Button(action: {
-                  self.editBadPoint(i: i)
+                  self.edit(i, pointType: .bad)
                 }, label: {
                   Label("EditButton".localized(), systemImage: "square.and.pencil")
                 })
                 Button(action: {
-                  self.deleteBadPoint(i: i)
+                  self.delete(i, pointType: .bad)
                 }, label: {
                   Label("DeleteButton".localized(), systemImage: "minus.circle")
                 })
@@ -147,23 +173,23 @@ extension ResultView {
     firstViewActive = false
   }
   
-  func editGoodPoint(i: Int) {
-    isSelectedGoodPoint = true
+  func edit(_ i: Int, pointType: PointType) {
+    switch pointType {
+    case .good:
+      isSelectedGoodPoint = true
+    case .bad:
+      isSelectedGoodPoint = false
+    }
     selectedIndex = i
     showingPointEditView = true
   }
   
-  func editBadPoint(i: Int) {
-    isSelectedGoodPoint = false
-    selectedIndex = i
-    showingPointEditView = true
-  }
-  
-  func deleteGoodPoint(i: Int) {
-    goodPoints.remove(at: i)
-  }
-  
-  func deleteBadPoint(i: Int) {
-    badPoints.remove(at: i)
+  func delete(_ i: Int, pointType: PointType) {
+    switch pointType {
+    case .good:
+      goodPoints.remove(at: i)
+    case .bad:
+      badPoints.remove(at: i)
+    }
   }
 }

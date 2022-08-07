@@ -39,10 +39,9 @@ extension HistoryView {
             openDetailView(topic: topic)
           }
       }
-      NavigationLink(destination: DetailView(
-        topic: $selectedTopic,
-        topics: $topics,
-                                             activeDetailView: $showingDetail),
+      NavigationLink(destination: HistoryDetailView(topic: $selectedTopic,
+                                                    topics: $topics,
+                                                    activeDetailView: $showingDetail),
                      isActive: $showingDetail) {
         
       }

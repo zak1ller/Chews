@@ -25,3 +25,8 @@
 "DeleteButton" = "삭제";
 "EditButton" = "편집";
 "SaveButton" = "저장";
+"AddButton" = "추가";
+"EditTitle" = "편집";
+"WriteTitle" = "작성";
+"AddTitle" = "추가";
+"DoneButton" = "완료";

@@ -10,12 +10,13 @@ import SwiftUI
 import Introspect
 import RealmSwift
 
-struct DetailView: View {
+struct HistoryDetailView: View {
   @Binding var topic: Topic
   @Binding var topics: [Topic]
   @Binding var activeDetailView: Bool
   @State private var uiTabarController: UITabBarController?
   @State private var showingPointEditView = false
+  @State private var showingPointAddView = false
   @State private var selectedPoint = ""
   @State private var selectedPointType: PointType = .good
   @State private var selectedPointIndex = 0
@@ -29,6 +30,12 @@ struct DetailView: View {
                                                 topic: $topic,
                                                 uiTabarController: $uiTabarController),
                      isActive: $showingPointEditView) {
+        EmptyView()
+      }
+      NavigationLink(destination: HistoryPointAddView(pointType: selectedPointType,
+                                                      topic: $topic,
+                                                      uiTabarController: $uiTabarController),
+                     isActive: $showingPointAddView) {
         EmptyView()
       }
       topicLabel
@@ -62,7 +69,7 @@ struct DetailView: View {
   }
 }
 
-extension DetailView {
+extension HistoryDetailView {
   var topicLabel: some View {
     Text(topic.topic)
       .foregroundColor(.appTextSubColor)
@@ -76,11 +83,24 @@ extension DetailView {
     ZStack {
       HStack {
         ScrollView {
-          HStack {
+          HStack(alignment: .center) {
             Spacer().frame(width: 16)
             Text("GoodPoints".localized())
               .foregroundColor(.appTextSubColor)
             Spacer()
+            ZStack {
+              Button(action: {
+                add(pointType: .good)
+              }) {
+                HStack {
+                  Spacer()
+                  Image(systemName: "plus.circle.fill")
+                    .foregroundColor(.appTextSubColor)
+                }
+              }
+              .frame(width: 32, height: 32)
+            }
+            Spacer().frame(width: 16)
           }
           Spacer().frame(height: 16)
           ForEach(0..<topic.goodPoints.count, id: \.self) { i in
@@ -92,7 +112,7 @@ extension DetailView {
                   Label("EditButton".localized(), systemImage: "square.and.pencil")
                 })
                 Button(action: {
-                  self.deleteGoodPoint(self.topic.goodPoints[i])
+                  self.delete(self.topic.goodPoints[i], pointType: .good)
                 }, label: {
                   Label("DeleteButton".localized(), systemImage: "minus.circle")
                 })
@@ -101,11 +121,24 @@ extension DetailView {
           Spacer().frame(height: 24)
         }
         ScrollView {
-          HStack {
+          HStack(alignment: .center) {
             Spacer().frame(width: 16)
             Text("BadPoints".localized())
               .foregroundColor(.appTextSubColor)
             Spacer()
+            ZStack {
+              Button(action: {
+                add(pointType: .bad)
+              }) {
+                HStack {
+                  Spacer()
+                  Image(systemName: "plus.circle.fill")
+                    .foregroundColor(.appTextSubColor)
+                }
+              }
+              .frame(width: 32, height: 32)
+            }
+            Spacer().frame(width: 16)
           }
           Spacer().frame(height: 16)
           ForEach(0..<topic.badPoints.count, id: \.self) { i in
@@ -117,7 +150,7 @@ extension DetailView {
                   Label("EditButton".localized(), systemImage: "square.and.pencil")
                 })
                 Button(action: {
-                  self.deleteBadPoint(self.topic.badPoints[i])
+                  self.delete(self.topic.badPoints[i], pointType: .bad)
                 }, label: {
                   Label("DeleteButton".localized(), systemImage: "minus.circle")
                 })
@@ -138,21 +171,16 @@ extension DetailView {
   }
 }
 
-extension DetailView {
+extension HistoryDetailView {
   func delete() {
     Topic.delete(topic: topic)
     topics = Topic.get()
     activeDetailView = false
   }
   
-  func deleteGoodPoint(_ goodPoint: String) {
-    Topic.deleteGootPoint(topic: topic, goodPoint: goodPoint)
-    topics = Topic.get()
-  }
-  
-  func deleteBadPoint(_ badPoint: String) {
-    Topic.deleteBadPoint(topic: topic, badPoint: badPoint)
-    topics = Topic.get()
+  func add(pointType: PointType) {
+    selectedPointType = pointType
+    showingPointAddView = true
   }
   
   func edit(_ point: String, pointType: PointType, i: Int) {
@@ -160,5 +188,10 @@ extension DetailView {
     selectedPointType = pointType
     selectedPointIndex = i
     showingPointEditView = true
+  }
+  
+  func delete(_ point: String, pointType: PointType) {
+    topic.deletePoint(point: point, pointType: pointType)
+    topics = Topic.get()
   }
 }

@@ -1,49 +1,45 @@
 //
-//  TopicEditView.swift
+//  HistoryAddView.swift
 //  Chews
 //
-//  Created by Min-Su Kim on 2022/08/06.
+//  Created by Min-Su Kim on 2022/08/07.
 //
 
 import Foundation
 import SwiftUI
 
-struct HistoryPointEditView: View {
-  let point: String
+struct HistoryPointAddView: View {
   let pointType: PointType
-  let index: Int
   
   @Environment(\.presentationMode) var presentationMode
   
   @Binding var topic: Topic
   @Binding var uiTabarController: UITabBarController?
-  @FocusState private var focused: Bool
   @State private var value = ""
   @State private var errorMessage = "";
   @State private var showingErrorMessage = false
+  @FocusState private var focused: Bool
   
   var body: some View {
     VStack {
       Spacer().frame(height: 24)
-      pointTextField
+      textField
       Spacer()
     }
     .onAppear {
-      value = point
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
         self.focused = true
         self.uiTabarController?.tabBar.isHidden = true
-      }
-    }
-    .onDisappear {
-      self.uiTabarController?.tabBar.isHidden = false
+      })
+    }.onDisappear{
+      uiTabarController?.tabBar.isHidden = false
     }
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         Button(action: {
-          save()
+          add()
         }) {
-          Text("SaveButton".localized())
+          Text("DoneButton".localized())
             .foregroundColor(.appPointColor)
         }
       }
@@ -56,29 +52,28 @@ struct HistoryPointEditView: View {
     }, message: {
       Text(errorMessage)
     })
-    .navigationTitle(Text("EditTitle".localized()))
-    .padding(.leading, 16)
-    .padding(.trailing, 16)
+    .padding(.horizontal, 16)
+    .navigationTitle(Text("AddTitle".localized()))
   }
 }
 
-extension HistoryPointEditView {
-  var pointTextField: some View {
-    TextField(point, text: $value, onCommit: {
-      save()
+extension HistoryPointAddView {
+  var textField: some View {
+    TextField("", text: $value, onCommit: {
+      add()
     })
     .focused($focused)
     .typeFieldStyle()
   }
 }
 
-extension HistoryPointEditView {
-  func save() {
+extension HistoryPointAddView {
+  func add() {
     if value.isEmpty {
       errorMessage = "ContentTooShort".localized()
       showingErrorMessage = true
     } else {
-      topic.editPoint(to: value, pointType: pointType, i: index)
+      topic.addPoint(text: value, pointType: pointType)
       self.presentationMode.wrappedValue.dismiss()
     }
   }

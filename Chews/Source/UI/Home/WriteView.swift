@@ -58,6 +58,7 @@ struct WriteView: View {
     }, message: {
       Text(errorMessage)
     })
+    .navigationTitle(Text("WriteTitle".localized()))
     .padding(.leading, 16)
     .padding(.trailing, 16)
   }

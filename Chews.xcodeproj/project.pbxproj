@@ -16,11 +16,12 @@
 		714D7CD7289D28C400413387 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714D7CD6289D28C400413387 /* Topic.swift */; };
 		714D7CDA289D2B6600413387 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714D7CD9289D2B6600413387 /* HistoryView.swift */; };
 		714D7CDC289D2D7900413387 /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714D7CDB289D2D7900413387 /* HistoryRow.swift */; };
-		714D7CDE289D33F400413387 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714D7CDD289D33F400413387 /* DetailView.swift */; };
+		714D7CDE289D33F400413387 /* HistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714D7CDD289D33F400413387 /* HistoryDetailView.swift */; };
 		7188A4EF289CEFE000316949 /* BadPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7188A4EE289CEFE000316949 /* BadPointView.swift */; };
 		7188A4F1289CF3FF00316949 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7188A4F0289CF3FF00316949 /* ResultView.swift */; };
 		7188A4F3289D003900316949 /* TopicRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7188A4F2289D003900316949 /* TopicRow.swift */; };
 		719C79E2289EB7C3002709BF /* ResultPointEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719C79E1289EB7C3002709BF /* ResultPointEditView.swift */; };
+		719C79E4289FF264002709BF /* HistoryPointAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719C79E3289FF264002709BF /* HistoryPointAddView.swift */; };
 		71D7C21E289E383400103A36 /* HistoryPointEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D7C21D289E383300103A36 /* HistoryPointEditView.swift */; };
 		71D7C220289E3DC200103A36 /* PointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D7C21F289E3DC200103A36 /* PointType.swift */; };
 		71E2327D2896EC34003DCD0B /* ChewsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E2327C2896EC34003DCD0B /* ChewsApp.swift */; };
@@ -45,11 +46,12 @@
 		714D7CD6289D28C400413387 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		714D7CD9289D2B6600413387 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		714D7CDB289D2D7900413387 /* HistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRow.swift; sourceTree = "<group>"; };
-		714D7CDD289D33F400413387 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		714D7CDD289D33F400413387 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
 		7188A4EE289CEFE000316949 /* BadPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadPointView.swift; sourceTree = "<group>"; };
 		7188A4F0289CF3FF00316949 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		7188A4F2289D003900316949 /* TopicRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicRow.swift; sourceTree = "<group>"; };
 		719C79E1289EB7C3002709BF /* ResultPointEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultPointEditView.swift; sourceTree = "<group>"; };
+		719C79E3289FF264002709BF /* HistoryPointAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPointAddView.swift; sourceTree = "<group>"; };
 		71D7C21D289E383300103A36 /* HistoryPointEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPointEditView.swift; sourceTree = "<group>"; };
 		71D7C21F289E3DC200103A36 /* PointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointType.swift; sourceTree = "<group>"; };
 		71E232792896EC34003DCD0B /* Chews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chews.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,8 +103,8 @@
 				71E2327E2896EC34003DCD0B /* HomeView.swift */,
 				710744862897AB1700609041 /* WriteView.swift */,
 				710744882897BA9000609041 /* GoodPointView.swift */,
-				7120BB94289B99F3004095ED /* PointRow.swift */,
 				7188A4EE289CEFE000316949 /* BadPointView.swift */,
+				7120BB94289B99F3004095ED /* PointRow.swift */,
 				7188A4F0289CF3FF00316949 /* ResultView.swift */,
 				719C79E1289EB7C3002709BF /* ResultPointEditView.swift */,
 			);
@@ -114,8 +116,9 @@
 			children = (
 				714D7CD9289D2B6600413387 /* HistoryView.swift */,
 				714D7CDB289D2D7900413387 /* HistoryRow.swift */,
-				714D7CDD289D33F400413387 /* DetailView.swift */,
+				714D7CDD289D33F400413387 /* HistoryDetailView.swift */,
 				71D7C21D289E383300103A36 /* HistoryPointEditView.swift */,
+				719C79E3289FF264002709BF /* HistoryPointAddView.swift */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -369,7 +372,8 @@
 				71D7C21E289E383400103A36 /* HistoryPointEditView.swift in Sources */,
 				710744872897AB1700609041 /* WriteView.swift in Sources */,
 				714D7CDA289D2B6600413387 /* HistoryView.swift in Sources */,
-				714D7CDE289D33F400413387 /* DetailView.swift in Sources */,
+				714D7CDE289D33F400413387 /* HistoryDetailView.swift in Sources */,
+				719C79E4289FF264002709BF /* HistoryPointAddView.swift in Sources */,
 				71E2327F2896EC34003DCD0B /* HomeView.swift in Sources */,
 				714D7CD7289D28C400413387 /* Topic.swift in Sources */,
 				71E2329E28971D1A003DCD0B /* BigButton.swift in Sources */,

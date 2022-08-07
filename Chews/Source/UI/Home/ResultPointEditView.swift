@@ -55,6 +55,7 @@ struct ResultPointEditView: View {
     }, message: {
       Text(errorMessage)
     })
+    .navigationTitle(Text("EditTitle".localized()))
   }
 }
 
