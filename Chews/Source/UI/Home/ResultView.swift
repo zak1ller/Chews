@@ -12,9 +12,12 @@ struct ResultView: View {
   var topic: String
   @Binding var firstViewActive: Bool
   @Binding var uiTabarController: UITabBarController?
-  @State var goodPoints: [String]
-  @State var badPoints: [String]
-  @State var showingFinishAlert = false
+  @Binding var goodPoints: [String]
+  @Binding var badPoints: [String]
+  @State private var isSelectedGoodPoint = false
+  @State private var showingFinishAlert = false
+  @State private var selectedIndex = 0
+  @State private var showingPointEditView = false
   
   var body: some View {
     VStack {
@@ -24,6 +27,12 @@ struct ResultView: View {
       topicLabel
       Spacer().frame(height: 24)
       listView
+      NavigationLink(destination: ResultPointEditView(points: isSelectedGoodPoint ? $goodPoints : $badPoints,
+                                                      uiTabarController: $uiTabarController,
+                                                      index: selectedIndex),
+                     isActive: $showingPointEditView) {
+        EmptyView()
+      }
     }
     .onAppear {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
@@ -69,7 +78,6 @@ extension ResultView {
     ZStack {
       HStack {
         ScrollView {
-          Spacer().frame(height: 16)
           HStack {
             Spacer().frame(width: 16)
             Text("GoodPoints".localized())
@@ -78,12 +86,23 @@ extension ResultView {
           }
           Spacer().frame(height: 16)
           ForEach(0..<goodPoints.count, id: \.self) { i in
-            ResultRow(index: i, point: self.goodPoints[i])
+            TopicRow(point: self.goodPoints[i])
+              .contextMenu {
+                Button(action: {
+                  self.editGoodPoint(i: i)
+                }, label: {
+                  Label("EditButton".localized(), systemImage: "square.and.pencil")
+                })
+                Button(action: {
+                  self.deleteGoodPoint(i: i)
+                }, label: {
+                  Label("DeleteButton".localized(), systemImage: "minus.circle")
+                })
+              }
           }
           Spacer().frame(height: 24)
         }
         ScrollView {
-          Spacer().frame(height: 16)
           HStack {
             Spacer().frame(width: 16)
             Text("BadPoints".localized())
@@ -92,13 +111,23 @@ extension ResultView {
           }
           Spacer().frame(height: 16)
           ForEach(0..<badPoints.count, id: \.self) { i in
-            ResultRow(index:  i, point: self.badPoints[i])
+            TopicRow(point: self.badPoints[i])
+              .contextMenu {
+                Button(action: {
+                  self.editBadPoint(i: i)
+                }, label: {
+                  Label("EditButton".localized(), systemImage: "square.and.pencil")
+                })
+                Button(action: {
+                  self.deleteBadPoint(i: i)
+                }, label: {
+                  Label("DeleteButton".localized(), systemImage: "minus.circle")
+                })
+              }
           }
           Spacer().frame(height: 24)
         }
       }
-      .background(Color.appBackgroundSubColor)
-      .cornerRadius(4)
       HStack {
         Spacer()
         Rectangle()
@@ -116,5 +145,25 @@ extension ResultView {
               goodPoints: goodPoints,
               badPoints: badPoints)
     firstViewActive = false
+  }
+  
+  func editGoodPoint(i: Int) {
+    isSelectedGoodPoint = true
+    selectedIndex = i
+    showingPointEditView = true
+  }
+  
+  func editBadPoint(i: Int) {
+    isSelectedGoodPoint = false
+    selectedIndex = i
+    showingPointEditView = true
+  }
+  
+  func deleteGoodPoint(i: Int) {
+    goodPoints.remove(at: i)
+  }
+  
+  func deleteBadPoint(i: Int) {
+    badPoints.remove(at: i)
   }
 }

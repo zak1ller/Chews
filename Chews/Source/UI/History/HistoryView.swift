@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct HistoryView: View {
-  @State private var topics: [Topic] = []
+  @State private var topics = Topic.get()
   @State private var showingDetail = false
   @State private var selectedTopic: Topic = Topic()
   @State private var selectedIndex: Int = 0

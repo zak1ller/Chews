@@ -19,7 +19,10 @@
 		714D7CDE289D33F400413387 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714D7CDD289D33F400413387 /* DetailView.swift */; };
 		7188A4EF289CEFE000316949 /* BadPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7188A4EE289CEFE000316949 /* BadPointView.swift */; };
 		7188A4F1289CF3FF00316949 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7188A4F0289CF3FF00316949 /* ResultView.swift */; };
-		7188A4F3289D003900316949 /* ResultRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7188A4F2289D003900316949 /* ResultRow.swift */; };
+		7188A4F3289D003900316949 /* TopicRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7188A4F2289D003900316949 /* TopicRow.swift */; };
+		719C79E2289EB7C3002709BF /* ResultPointEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719C79E1289EB7C3002709BF /* ResultPointEditView.swift */; };
+		71D7C21E289E383400103A36 /* HistoryPointEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D7C21D289E383300103A36 /* HistoryPointEditView.swift */; };
+		71D7C220289E3DC200103A36 /* PointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D7C21F289E3DC200103A36 /* PointType.swift */; };
 		71E2327D2896EC34003DCD0B /* ChewsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E2327C2896EC34003DCD0B /* ChewsApp.swift */; };
 		71E2327F2896EC34003DCD0B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E2327E2896EC34003DCD0B /* HomeView.swift */; };
 		71E232812896EC37003DCD0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71E232802896EC37003DCD0B /* Assets.xcassets */; };
@@ -45,7 +48,10 @@
 		714D7CDD289D33F400413387 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		7188A4EE289CEFE000316949 /* BadPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadPointView.swift; sourceTree = "<group>"; };
 		7188A4F0289CF3FF00316949 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
-		7188A4F2289D003900316949 /* ResultRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultRow.swift; sourceTree = "<group>"; };
+		7188A4F2289D003900316949 /* TopicRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicRow.swift; sourceTree = "<group>"; };
+		719C79E1289EB7C3002709BF /* ResultPointEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultPointEditView.swift; sourceTree = "<group>"; };
+		71D7C21D289E383300103A36 /* HistoryPointEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPointEditView.swift; sourceTree = "<group>"; };
+		71D7C21F289E3DC200103A36 /* PointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointType.swift; sourceTree = "<group>"; };
 		71E232792896EC34003DCD0B /* Chews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71E2327C2896EC34003DCD0B /* ChewsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChewsApp.swift; sourceTree = "<group>"; };
 		71E2327E2896EC34003DCD0B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -98,7 +104,7 @@
 				7120BB94289B99F3004095ED /* PointRow.swift */,
 				7188A4EE289CEFE000316949 /* BadPointView.swift */,
 				7188A4F0289CF3FF00316949 /* ResultView.swift */,
-				7188A4F2289D003900316949 /* ResultRow.swift */,
+				719C79E1289EB7C3002709BF /* ResultPointEditView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -109,6 +115,7 @@
 				714D7CD9289D2B6600413387 /* HistoryView.swift */,
 				714D7CDB289D2D7900413387 /* HistoryRow.swift */,
 				714D7CDD289D33F400413387 /* DetailView.swift */,
+				71D7C21D289E383300103A36 /* HistoryPointEditView.swift */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -153,6 +160,7 @@
 		71E2328A2896EC94003DCD0B /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				7188A4F2289D003900316949 /* TopicRow.swift */,
 				710744852897AAF700609041 /* Home */,
 				714D7CD8289D2B5A00413387 /* History */,
 			);
@@ -183,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				714D7CD6289D28C400413387 /* Topic.swift */,
+				71D7C21F289E3DC200103A36 /* PointType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -353,8 +362,11 @@
 				7188A4EF289CEFE000316949 /* BadPointView.swift in Sources */,
 				7188A4F1289CF3FF00316949 /* ResultView.swift in Sources */,
 				710744892897BA9000609041 /* GoodPointView.swift in Sources */,
+				719C79E2289EB7C3002709BF /* ResultPointEditView.swift in Sources */,
 				71E232942896EEFD003DCD0B /* ColorExtension.swift in Sources */,
-				7188A4F3289D003900316949 /* ResultRow.swift in Sources */,
+				71D7C220289E3DC200103A36 /* PointType.swift in Sources */,
+				7188A4F3289D003900316949 /* TopicRow.swift in Sources */,
+				71D7C21E289E383400103A36 /* HistoryPointEditView.swift in Sources */,
 				710744872897AB1700609041 /* WriteView.swift in Sources */,
 				714D7CDA289D2B6600413387 /* HistoryView.swift in Sources */,
 				714D7CDE289D33F400413387 /* DetailView.swift in Sources */,

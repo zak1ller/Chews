@@ -15,11 +15,22 @@ struct DetailView: View {
   @Binding var topics: [Topic]
   @Binding var activeDetailView: Bool
   @State private var uiTabarController: UITabBarController?
-  @State private var deleteGoodPoint = ""
+  @State private var showingPointEditView = false
+  @State private var selectedPoint = ""
+  @State private var selectedPointType: PointType = .good
+  @State private var selectedPointIndex = 0
   
   var body: some View {
     VStack {
       Spacer().frame(height: 24)
+      NavigationLink(destination: HistoryPointEditView(point: selectedPoint,
+                                                pointType: selectedPointType,
+                                                index: selectedPointIndex,
+                                                topic: $topic,
+                                                uiTabarController: $uiTabarController),
+                     isActive: $showingPointEditView) {
+        EmptyView()
+      }
       topicLabel
       Spacer().frame(height: 24)
       listView
@@ -27,6 +38,12 @@ struct DetailView: View {
     .introspectTabBarController { (UITabBarController) in
       UITabBarController.tabBar.isHidden = true
       uiTabarController = UITabBarController
+    }
+    .onAppear {
+      topics = Topic.get()
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
+        self.uiTabarController?.tabBar.isHidden = true
+      })
     }.onDisappear{
       uiTabarController?.tabBar.isHidden = false
     }
@@ -66,17 +83,16 @@ extension DetailView {
             Spacer()
           }
           Spacer().frame(height: 16)
-          ForEach(topic.goodPoints, id: \.self) { goodPoint in
-            ResultRow(index: 0, point: goodPoint)
+          ForEach(0..<topic.goodPoints.count, id: \.self) { i in
+            TopicRow(point: self.topic.goodPoints[i])
               .contextMenu {
                 Button(action: {
-                  
+                  self.edit(self.topic.goodPoints[i], pointType: .good, i: i)
                 }, label: {
                   Label("EditButton".localized(), systemImage: "square.and.pencil")
                 })
                 Button(action: {
-                  self.deleteGoodPoint = goodPoint
-                  self.deleteGoodPoint(goodPoint)
+                  self.deleteGoodPoint(self.topic.goodPoints[i])
                 }, label: {
                   Label("DeleteButton".localized(), systemImage: "minus.circle")
                 })
@@ -92,16 +108,16 @@ extension DetailView {
             Spacer()
           }
           Spacer().frame(height: 16)
-          ForEach(topic.badPoints, id: \.self) { badPoint in
-            ResultRow(index: 0, point: badPoint)
+          ForEach(0..<topic.badPoints.count, id: \.self) { i in
+            TopicRow(point: self.topic.badPoints[i])
               .contextMenu {
                 Button(action: {
-                  
+                  self.edit(self.topic.badPoints[i], pointType: .bad, i: i)
                 }, label: {
                   Label("EditButton".localized(), systemImage: "square.and.pencil")
                 })
                 Button(action: {
-                  self.deleteBadPoint(badPoint)
+                  self.deleteBadPoint(self.topic.badPoints[i])
                 }, label: {
                   Label("DeleteButton".localized(), systemImage: "minus.circle")
                 })
@@ -137,5 +153,12 @@ extension DetailView {
   func deleteBadPoint(_ badPoint: String) {
     Topic.deleteBadPoint(topic: topic, badPoint: badPoint)
     topics = Topic.get()
+  }
+  
+  func edit(_ point: String, pointType: PointType, i: Int) {
+    selectedPoint = point
+    selectedPointType = pointType
+    selectedPointIndex = i
+    showingPointEditView = true
   }
 }

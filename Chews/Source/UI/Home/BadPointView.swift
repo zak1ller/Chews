@@ -10,7 +10,7 @@ import SwiftUI
 
 struct BadPointView: View {
   var topic: String
-  var goodPoints: [String]
+  @Binding var goodPoints: [String]
   @Binding var firstViewActive: Bool
   @Binding var uiTabarController: UITabBarController?
   @State var latestCount = 0
@@ -43,8 +43,8 @@ struct BadPointView: View {
         NavigationLink(destination: ResultView(topic: topic,
                                                firstViewActive: $firstViewActive,
                                                uiTabarController: $uiTabarController,
-                                               goodPoints: goodPoints,
-                                               badPoints: badPoints),
+                                               goodPoints: $goodPoints,
+                                               badPoints: $badPoints),
                        isActive: $showingResultView) {
           Button(action: {
             next()

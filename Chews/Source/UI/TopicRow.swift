@@ -8,8 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct ResultRow: View {
-  let index: Int
+struct TopicRow: View {
   let point: String
   
   var body: some View {
@@ -32,7 +31,7 @@ struct ResultRow: View {
   }
 }
 
-extension ResultRow {
+extension TopicRow {
   var contentText: some View {
     HStack {
       Text(point)

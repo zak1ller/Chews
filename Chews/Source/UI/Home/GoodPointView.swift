@@ -44,7 +44,7 @@ struct GoodPointView: View {
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         NavigationLink(destination: BadPointView(topic: topic,
-                                                 goodPoints: goodPoints,
+                                                 goodPoints: $goodPoints,
                                                  firstViewActive: $firstViewActive,
                                                  uiTabarController: $uiTabarController),
                        isActive: $showingBadPointView) {
