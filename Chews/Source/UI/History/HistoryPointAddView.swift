@@ -14,7 +14,6 @@ struct HistoryPointAddView: View {
   @Environment(\.presentationMode) var presentationMode
   
   @Binding var topic: Topic
-  @Binding var uiTabarController: UITabBarController?
   @State private var value = ""
   @State private var errorMessage = "";
   @State private var showingErrorMessage = false
@@ -29,10 +28,7 @@ struct HistoryPointAddView: View {
     .onAppear {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
         self.focused = true
-        self.uiTabarController?.tabBar.isHidden = true
       })
-    }.onDisappear{
-      uiTabarController?.tabBar.isHidden = false
     }
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {

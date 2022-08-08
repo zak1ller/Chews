@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import IceCream
 
 @main
 struct ChewsApp: App {
+  @State private var syncEngine: SyncEngine?
+  
   var body: some Scene {
     WindowGroup {
       TabView {
@@ -29,6 +32,13 @@ struct ChewsApp: App {
       .tabViewStyle(selectedItemColor: Color.appPointColor)
       .onAppear {
         UINavigationBar.appearance().tintColor = UIColor.white
+        
+        // Sync realm cloukit
+        syncEngine = SyncEngine(objects: [
+          SyncObject(type: Topic.self),
+        ])
+//        application.registerForRemoteNotifications()
+  
       }
     }
   }

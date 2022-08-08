@@ -9,7 +9,10 @@ import Foundation
 import SwiftUI
 
 struct TopicRow: View {
-  let point: String
+  var tappedAction: (() -> ())?
+                     
+  @Binding var point: Point
+  @State private var scoreTextValue = ""
   
   var body: some View {
     VStack {
@@ -20,25 +23,49 @@ struct TopicRow: View {
       }
       Spacer().frame(height: 16)
     }
+    .onAppear {
+      scoreTextValue = "\(point.score)"
+    }
     .background(Color.appBackgroundSubColor)
     .listRowSeparator(.hidden)
     .listRowInsets(EdgeInsets())
     .fixedSize(horizontal: false, vertical: true)
     .cornerRadius(4)
+    .padding(.horizontal, 16)
     .padding(.bottom, 16)
-    .padding(.leading, 16)
-    .padding(.trailing, 16)
+    .onTapGesture {
+      if point.score < 5 {
+        point.score += 1
+      } else {
+        point.score = 1
+      }
+      scoreTextValue = "\(point.score)"
+      tappedAction?()
+    }
   }
 }
 
 extension TopicRow {
   var contentText: some View {
     HStack {
-      Text(point)
+      Text(point.title)
         .font(.system(size: 14, weight: .regular))
         .foregroundColor(.appTextColor)
+      +
+      Text(" ")
+      +
+      Text(scoreTextValue)
+        .font(.system(size: 14, weight: .medium))
+        .foregroundColor(.appPointColor)
+    
     }
-    .padding(.leading, 16)
-    .padding(.trailing, 16)
+    .padding(.horizontal, 16)
+  }
+  
+  var scoreText: some View {
+    Text(scoreTextValue)
+      .foregroundColor(Color.appPointColor)
+      .font(.system(size: 12, weight: .medium))
+      .padding(.horizontal, 16)
   }
 }

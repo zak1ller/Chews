@@ -20,6 +20,8 @@
 		7188A4EF289CEFE000316949 /* BadPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7188A4EE289CEFE000316949 /* BadPointView.swift */; };
 		7188A4F1289CF3FF00316949 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7188A4F0289CF3FF00316949 /* ResultView.swift */; };
 		7188A4F3289D003900316949 /* TopicRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7188A4F2289D003900316949 /* TopicRow.swift */; };
+		719B09ED28A0DFF2009421E1 /* Chews.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = 719B09EC28A0DFF2009421E1 /* Chews.mobileprovision */; };
+		719B09F028A0E05C009421E1 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 719B09EF28A0E05C009421E1 /* CloudKit.framework */; };
 		719C79E2289EB7C3002709BF /* ResultPointEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719C79E1289EB7C3002709BF /* ResultPointEditView.swift */; };
 		719C79E4289FF264002709BF /* HistoryPointAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719C79E3289FF264002709BF /* HistoryPointAddView.swift */; };
 		71AB2A6C28A0CF0700CDC72D /* ResultPointAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AB2A6B28A0CF0700CDC72D /* ResultPointAddView.swift */; };
@@ -51,6 +53,9 @@
 		7188A4EE289CEFE000316949 /* BadPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadPointView.swift; sourceTree = "<group>"; };
 		7188A4F0289CF3FF00316949 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		7188A4F2289D003900316949 /* TopicRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicRow.swift; sourceTree = "<group>"; };
+		719B09EC28A0DFF2009421E1 /* Chews.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chews.mobileprovision; sourceTree = "<group>"; };
+		719B09EE28A0E055009421E1 /* Chews.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Chews.entitlements; sourceTree = "<group>"; };
+		719B09EF28A0E05C009421E1 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		719C79E1289EB7C3002709BF /* ResultPointEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultPointEditView.swift; sourceTree = "<group>"; };
 		719C79E3289FF264002709BF /* HistoryPointAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPointAddView.swift; sourceTree = "<group>"; };
 		71AB2A6B28A0CF0700CDC72D /* ResultPointAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultPointAddView.swift; sourceTree = "<group>"; };
@@ -76,6 +81,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42B1E5444038083964BBF4D9 /* Pods_Chews.framework in Frameworks */,
+				719B09F028A0E05C009421E1 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +91,7 @@
 		1A829D10E47061B3CF17F853 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				719B09EF28A0E05C009421E1 /* CloudKit.framework */,
 				DBA63D7F9A89640247EEC29F /* Pods_Chews.framework */,
 			);
 			name = Frameworks;
@@ -147,6 +154,8 @@
 		71E2327B2896EC34003DCD0B /* Chews */ = {
 			isa = PBXGroup;
 			children = (
+				719B09EE28A0E055009421E1 /* Chews.entitlements */,
+				719B09EC28A0DFF2009421E1 /* Chews.mobileprovision */,
 				7120BB96289BE00A004095ED /* Info.plist */,
 				71E232912896ED7F003DCD0B /* Source */,
 				71E232902896ED6C003DCD0B /* Resource */,
@@ -310,6 +319,7 @@
 				71E232842896EC37003DCD0B /* Preview Assets.xcassets in Resources */,
 				7120BB8E289B9349004095ED /* InfoPlist.strings in Resources */,
 				71E2329928971929003DCD0B /* Localizable.strings in Resources */,
+				719B09ED28A0DFF2009421E1 /* Chews.mobileprovision in Resources */,
 				71E232812896EC37003DCD0B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -533,6 +543,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Chews/Chews.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Chews/Preview Content\"";
@@ -552,6 +564,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mnis.Chews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -564,6 +577,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Chews/Chews.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Chews/Preview Content\"";
@@ -583,6 +598,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mnis.Chews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

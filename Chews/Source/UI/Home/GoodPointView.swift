@@ -12,14 +12,13 @@ import Introspect
 struct GoodPointView: View {
   var topic: String
   @Binding var firstViewActive: Bool
-  @Binding var uiTabarController: UITabBarController?
   @FocusState private var focused: Bool
   @State var latestCount = 0
   @State private var goodPointValue = ""
   @State private var errorMessage = ""
   @State private var showingErrorMessage = false
   @State private var showingBadPointView = false
-  @State private var goodPoints: [String] = []
+  @State private var goodPoints: [Point] = []
   
   var body: some View {
     VStack {
@@ -35,18 +34,13 @@ struct GoodPointView: View {
     .onAppear {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
         self.focused = true
-        self.uiTabarController?.tabBar.isHidden = true
       }
-    }
-    .onDisappear {
-      self.uiTabarController?.tabBar.isHidden = false
     }
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         NavigationLink(destination: BadPointView(topic: topic,
                                                  goodPoints: $goodPoints,
-                                                 firstViewActive: $firstViewActive,
-                                                 uiTabarController: $uiTabarController),
+                                                 firstViewActive: $firstViewActive),
                        isActive: $showingBadPointView) {
           Button(action: {
             next()
@@ -88,7 +82,7 @@ extension GoodPointView {
       ScrollView(.vertical, showsIndicators: false) {
         VStack {
           ForEach(0..<goodPoints.count, id: \.self) { i in
-            PointRow(point: "\(self.goodPoints[i])") {
+            PointRow(point: "\(self.goodPoints[i].title)") {
               self.goodPoints.remove(at: i)
             }
             .id(i)
@@ -115,7 +109,10 @@ extension GoodPointView {
       errorMessage = "ContentTooShort".localized()
       showingErrorMessage = true
     } else {
-      goodPoints.append(goodPointValue)
+      let point = Point()
+      point.title = goodPointValue
+      
+      goodPoints.append(point)
       goodPointValue = ""
       focused = true
     }

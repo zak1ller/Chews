@@ -9,4 +9,5 @@ target 'Chews' do
   pod 'RealmSwift'
   pod 'Toaster'
   pod 'Introspect'
+  pod 'IceCream'
 end

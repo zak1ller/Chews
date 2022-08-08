@@ -11,14 +11,16 @@ import SwiftUI
 struct ResultView: View {
   var topic: String
   @Binding var firstViewActive: Bool
-  @Binding var uiTabarController: UITabBarController?
-  @Binding var goodPoints: [String]
-  @Binding var badPoints: [String]
+  @Binding var goodPoints: [Point]
+  @Binding var badPoints: [Point]
   @State private var isSelectedGoodPoint = false
   @State private var showingFinishAlert = false
   @State private var selectedIndex = 0
   @State private var showingPointEditView = false
   @State private var showingPointAddView = false
+  @State private var hiddenTrigger = false
+  @State private var goodPointScore = ""
+  @State private var badPointScore = ""
   
   var body: some View {
     VStack {
@@ -28,25 +30,20 @@ struct ResultView: View {
       topicLabel
       Spacer().frame(height: 24)
       listView
-      NavigationLink(destination: ResultPointEditView(points: isSelectedGoodPoint ? $goodPoints : $badPoints,
-                                                      uiTabarController: $uiTabarController,
+      NavigationLink(destination: ResultPointEditView(
+        point: isSelectedGoodPoint ? $goodPoints[selectedIndex] : $badPoints[selectedIndex],
                                                       index: selectedIndex),
                      isActive: $showingPointEditView) {
         EmptyView()
       }
-      NavigationLink(destination: ResultPointAddView(uiTabarController: $uiTabarController,
-                                                     points: isSelectedGoodPoint ? $goodPoints : $badPoints),
+      NavigationLink(destination: ResultPointAddView(points: isSelectedGoodPoint ? $goodPoints : $badPoints),
                      isActive: $showingPointAddView) {
         EmptyView()
       }
     }
     .onAppear {
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
-        uiTabarController?.tabBar.isHidden = true
-      }
-    }
-    .onDisappear {
-      uiTabarController?.tabBar.isHidden = false
+      hiddenTrigger.toggle()
+      updateScore()
     }
     .edgesIgnoringSafeArea(.bottom)
     .toolbar {
@@ -54,7 +51,7 @@ struct ResultView: View {
         Button(action: {
           finish()
         }) {
-          Text("FinishButton".localized())
+          Text(hiddenTrigger ? "FinishButton".localized() : "FinishButton".localized())
             .foregroundColor(.appPointColor)
         }
       }
@@ -88,6 +85,9 @@ extension ResultView {
             Spacer().frame(width: 16)
             Text("GoodPoints".localized())
               .foregroundColor(.appTextSubColor)
+            Spacer().frame(width: 4)
+            Text(goodPointScore)
+              .foregroundColor(.appPointColor)
             Spacer()
             ZStack {
               Button(action: {
@@ -105,7 +105,10 @@ extension ResultView {
           }
           Spacer().frame(height: 16)
           ForEach(0..<goodPoints.count, id: \.self) { i in
-            TopicRow(point: self.goodPoints[i])
+            TopicRow(tappedAction: {
+              self.updateScore()
+            },
+                     point: self.$goodPoints[i])
               .contextMenu {
                 Button(action: {
                   self.edit(i, pointType: .good)
@@ -126,6 +129,9 @@ extension ResultView {
             Spacer().frame(width: 16)
             Text("BadPoints".localized())
               .foregroundColor(.appTextSubColor)
+            Spacer().frame(width: 4)
+            Text(badPointScore)
+              .foregroundColor(.appPointColor)
             Spacer()
             ZStack {
               Button(action: {
@@ -143,7 +149,9 @@ extension ResultView {
           }
           Spacer().frame(height: 16)
           ForEach(0..<badPoints.count, id: \.self) { i in
-            TopicRow(point: self.badPoints[i])
+            TopicRow(tappedAction: {
+              self.updateScore()
+            } ,point: self.$badPoints[i])
               .contextMenu {
                 Button(action: {
                   self.edit(i, pointType: .bad)
@@ -177,6 +185,20 @@ extension ResultView {
               goodPoints: goodPoints,
               badPoints: badPoints)
     firstViewActive = false
+  }
+  
+  func updateScore() {
+    var value = 0
+    goodPoints.forEach {
+      value += $0.score
+    }
+    goodPointScore = "\(value)"
+    
+    value = 0
+    badPoints.forEach {
+      value += $0.score
+    }
+    badPointScore = "\(value)"
   }
   
   func add(pointType: PointType) {

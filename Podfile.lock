@@ -1,30 +1,35 @@
 PODS:
+  - IceCream (2.0.4):
+    - RealmSwift (< 10.8.0)
   - Introspect (0.1.4)
-  - Realm (10.28.3):
-    - Realm/Headers (= 10.28.3)
-  - Realm/Headers (10.28.3)
-  - RealmSwift (10.28.3):
-    - Realm (= 10.28.3)
+  - Realm (10.7.7):
+    - Realm/Headers (= 10.7.7)
+  - Realm/Headers (10.7.7)
+  - RealmSwift (10.7.7):
+    - Realm (= 10.7.7)
   - Toaster (2.3.0)
 
 DEPENDENCIES:
+  - IceCream
   - Introspect
   - RealmSwift
   - Toaster
 
 SPEC REPOS:
   trunk:
+    - IceCream
     - Introspect
     - Realm
     - RealmSwift
     - Toaster
 
 SPEC CHECKSUMS:
+  IceCream: 717d516a1c634eba8eaa8ce7d3d7bc5f7e40c2fa
   Introspect: b62c4dd2063072327c21d618ef2bedc3c87bc366
-  Realm: 64e66568d981de2496f81ecab2e1372b27dc7d58
-  RealmSwift: 29bcda3a1fa5613b358bd7ec638f5e12afc89c3a
+  Realm: 8010af8b7a576ba501729bcbc54a3cd1f1f7dca3
+  RealmSwift: dc17e6d649c12a8996f9e962c3fe6cef356885c4
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: b90c48b5ba5a54833f952f5d53e0e4d1dd457e1e
+PODFILE CHECKSUM: 95f241f7fc6f4802ca86e4d2e4ca0202d67e79c0
 
 COCOAPODS: 1.11.2

@@ -7,21 +7,34 @@
 
 import Foundation
 import RealmSwift
+import IceCream
+
+final class Point: Object {
+  @objc dynamic var title = ""
+  @objc dynamic var score = 1
+}
 
 final class Topic: Object {
-  @objc dynamic let id = UUID()
+  @objc dynamic var id: String!
   @objc dynamic var topic = ""
-  var goodPoints: List<String> = List<String>()
-  var badPoints: List<String> = List<String>()
+  var goodPoints: List<Point> = List<Point>()
+  var badPoints: List<Point> = List<Point>()
   @objc dynamic var date: Date = Date()
   @objc dynamic var isDeleted: Bool = false
+  
+  override class func primaryKey() -> String? {
+    return "id"
+  }
 }
 
 extension Topic: Identifiable {}
 
+extension Topic: CKRecordConvertible & CKRecordRecoverable {}
+
 extension Topic {
-  static func add(topic: String, goodPoints: [String], badPoints: [String]) {
+  static func add(topic: String, goodPoints: [Point], badPoints: [Point]) {
     let data = Topic()
+    data.id = UUID().uuidString
     data.topic = topic
     
     for value in goodPoints {
@@ -57,49 +70,49 @@ extension Topic {
   }
   
   func addPoint(text: String, pointType: PointType) {
-    try! Realm().write {
-      switch pointType {
-      case .good:
-        self.goodPoints.append(text)
-      case .bad:
-        self.badPoints.append(text)
-      }
-    }
+//    try! Realm().write {
+//      switch pointType {
+//      case .good:
+//        self.goodPoints.append(text)
+//      case .bad:
+//        self.badPoints.append(text)
+//      }
+//    }
   }
   
   func deletePoint(point: String, pointType: PointType) {
-    try! Realm().write {
-      switch pointType {
-      case .good:
-        var i = 0
-        for value in goodPoints {
-          if value == point {
-            goodPoints.remove(at: i)
-          } else {
-            i += 1
-          }
-        }
-      case .bad:
-        var i = 0
-        for value in badPoints {
-          if value == point {
-            badPoints.remove(at: i)
-          } else {
-            i += 1
-          }
-        }
-      }
-    }
+//    try! Realm().write {
+//      switch pointType {
+//      case .good:
+//        var i = 0
+//        for value in goodPoints {
+//          if value == point {
+//            goodPoints.remove(at: i)
+//          } else {
+//            i += 1
+//          }
+//        }
+//      case .bad:
+//        var i = 0
+//        for value in badPoints {
+//          if value == point {
+//            badPoints.remove(at: i)
+//          } else {
+//            i += 1
+//          }
+//        }
+//      }
+//    }
   }
   
   func editPoint(to text: String, pointType: PointType, i: Int) {
-    try! Realm().write {
-      switch pointType {
-      case .good:
-        goodPoints[i] = text
-      case .bad:
-        badPoints[i] = text
-      }
-    }
+//    try! Realm().write {
+//      switch pointType {
+//      case .good:
+//        goodPoints[i] = text
+//      case .bad:
+//        badPoints[i] = text
+//      }
+//    }
   }
 }

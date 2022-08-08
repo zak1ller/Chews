@@ -10,8 +10,7 @@ import SwiftUI
 
 struct ResultPointAddView: View {
   @Environment(\.presentationMode) var presentationMode
-  @Binding var uiTabarController: UITabBarController?
-  @Binding var points: [String]
+  @Binding var points: [Point]
   @State private var value = ""
   @State private var errorMessage = "";
   @State private var showingErrorMessage = false
@@ -26,10 +25,7 @@ struct ResultPointAddView: View {
     .onAppear {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
         self.focused = true
-        self.uiTabarController?.tabBar.isHidden = true
       })
-    }.onDisappear{
-      uiTabarController?.tabBar.isHidden = false
     }
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
@@ -70,7 +66,9 @@ extension ResultPointAddView {
       errorMessage = "ContentTooShort".localized()
       showingErrorMessage = true
     } else {
-      points.append(value)
+      let point = Point()
+      point.title = value
+      points.append(point)
       self.presentationMode.wrappedValue.dismiss()
     }
   }

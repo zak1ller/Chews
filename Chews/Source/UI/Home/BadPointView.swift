@@ -10,12 +10,11 @@ import SwiftUI
 
 struct BadPointView: View {
   var topic: String
-  @Binding var goodPoints: [String]
+  @Binding var goodPoints: [Point]
   @Binding var firstViewActive: Bool
-  @Binding var uiTabarController: UITabBarController?
   @State var latestCount = 0
   @State private var badPointValue = ""
-  @State private var badPoints: [String] = []
+  @State private var badPoints: [Point] = []
   @State private var errorMessage = ""
   @State private var showingErrorMessage = false
   @State private var showingResultView = false
@@ -35,14 +34,12 @@ struct BadPointView: View {
     .onAppear {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
         self.focused = true
-        self.uiTabarController?.tabBar.isHidden = true
       }
     }
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         NavigationLink(destination: ResultView(topic: topic,
                                                firstViewActive: $firstViewActive,
-                                               uiTabarController: $uiTabarController,
                                                goodPoints: $goodPoints,
                                                badPoints: $badPoints),
                        isActive: $showingResultView) {
@@ -86,7 +83,7 @@ extension BadPointView {
       ScrollView(.vertical, showsIndicators: false) {
         VStack {
           ForEach(0..<badPoints.count, id: \.self) { i in
-            PointRow(point: "\(self.badPoints[i])") {
+            PointRow(point: "\(self.badPoints[i].title)") {
               self.badPoints.remove(at: i)
             }
             .id(i)
@@ -113,7 +110,9 @@ extension BadPointView {
       errorMessage = "ContentTooShort".localized()
       showingErrorMessage = true
     } else {
-      badPoints.append(badPointValue)
+      let point = Point()
+      point.title = badPointValue
+      badPoints.append(point)
       badPointValue = ""
       focused = true
     }

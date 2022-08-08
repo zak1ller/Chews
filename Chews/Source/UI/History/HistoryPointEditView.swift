@@ -16,7 +16,6 @@ struct HistoryPointEditView: View {
   @Environment(\.presentationMode) var presentationMode
   
   @Binding var topic: Topic
-  @Binding var uiTabarController: UITabBarController?
   @FocusState private var focused: Bool
   @State private var value = ""
   @State private var errorMessage = "";
@@ -32,11 +31,7 @@ struct HistoryPointEditView: View {
       value = point
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
         self.focused = true
-        self.uiTabarController?.tabBar.isHidden = true
       }
-    }
-    .onDisappear {
-      self.uiTabarController?.tabBar.isHidden = false
     }
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {

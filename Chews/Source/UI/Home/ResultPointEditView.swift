@@ -10,8 +10,7 @@ import SwiftUI
 
 struct ResultPointEditView: View {
   @Environment(\.presentationMode) var presentationMode
-  @Binding var points: [String]
-  @Binding var uiTabarController: UITabBarController?
+  @Binding var point: Point
   @FocusState private var focused: Bool
   @State private var value = ""
   @State private var errorMessage = "";
@@ -28,14 +27,10 @@ struct ResultPointEditView: View {
     .padding(.leading, 16)
     .padding(.trailing, 16)
     .onAppear {
-      value = points[index]
+      value = point.title
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
         self.focused = true
-        self.uiTabarController?.tabBar.isHidden = true
       }
-    }
-    .onDisappear {
-      self.uiTabarController?.tabBar.isHidden = false
     }
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
@@ -61,7 +56,7 @@ struct ResultPointEditView: View {
 
 extension ResultPointEditView {
   var pointTextField: some View {
-    TextField(points[index], text: $value, onCommit: {
+    TextField(point.title, text: $value, onCommit: {
       save()
     })
     .focused($focused)
@@ -75,7 +70,7 @@ extension ResultPointEditView {
       errorMessage = "ContentTooShort".localized()
       showingErrorMessage = true
     } else {
-      points[index] = value
+      point.title = value
       self.presentationMode.wrappedValue.dismiss()
     }
   }

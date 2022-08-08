@@ -14,7 +14,6 @@ struct HistoryDetailView: View {
   @Binding var topic: Topic
   @Binding var topics: [Topic]
   @Binding var activeDetailView: Bool
-  @State private var uiTabarController: UITabBarController?
   @State private var showingPointEditView = false
   @State private var showingPointAddView = false
   @State private var selectedPoint = ""
@@ -27,14 +26,12 @@ struct HistoryDetailView: View {
       NavigationLink(destination: HistoryPointEditView(point: selectedPoint,
                                                 pointType: selectedPointType,
                                                 index: selectedPointIndex,
-                                                topic: $topic,
-                                                uiTabarController: $uiTabarController),
+                                                topic: $topic),
                      isActive: $showingPointEditView) {
         EmptyView()
       }
       NavigationLink(destination: HistoryPointAddView(pointType: selectedPointType,
-                                                      topic: $topic,
-                                                      uiTabarController: $uiTabarController),
+                                                      topic: $topic),
                      isActive: $showingPointAddView) {
         EmptyView()
       }
@@ -44,15 +41,9 @@ struct HistoryDetailView: View {
     }
     .introspectTabBarController { (UITabBarController) in
       UITabBarController.tabBar.isHidden = true
-      uiTabarController = UITabBarController
     }
     .onAppear {
       topics = Topic.get()
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
-        self.uiTabarController?.tabBar.isHidden = true
-      })
-    }.onDisappear{
-      uiTabarController?.tabBar.isHidden = false
     }
     .navigationBarTitleDisplayMode(.inline)
     .edgesIgnoringSafeArea(.bottom)
@@ -104,15 +95,15 @@ extension HistoryDetailView {
           }
           Spacer().frame(height: 16)
           ForEach(0..<topic.goodPoints.count, id: \.self) { i in
-            TopicRow(point: self.topic.goodPoints[i])
+            TopicRow(point: self.$topic.goodPoints[i])
               .contextMenu {
                 Button(action: {
-                  self.edit(self.topic.goodPoints[i], pointType: .good, i: i)
+                  self.edit(self.topic.goodPoints[i].title, pointType: .good, i: i)
                 }, label: {
                   Label("EditButton".localized(), systemImage: "square.and.pencil")
                 })
                 Button(action: {
-                  self.delete(self.topic.goodPoints[i], pointType: .good)
+                  self.delete(self.topic.goodPoints[i].title, pointType: .good)
                 }, label: {
                   Label("DeleteButton".localized(), systemImage: "minus.circle")
                 })
@@ -142,15 +133,15 @@ extension HistoryDetailView {
           }
           Spacer().frame(height: 16)
           ForEach(0..<topic.badPoints.count, id: \.self) { i in
-            TopicRow(point: self.topic.badPoints[i])
+            TopicRow(point: self.$topic.badPoints[i])
               .contextMenu {
                 Button(action: {
-                  self.edit(self.topic.badPoints[i], pointType: .bad, i: i)
+                  self.edit(self.topic.badPoints[i].title, pointType: .bad, i: i)
                 }, label: {
                   Label("EditButton".localized(), systemImage: "square.and.pencil")
                 })
                 Button(action: {
-                  self.delete(self.topic.badPoints[i], pointType: .bad)
+                  self.delete(self.topic.badPoints[i].title, pointType: .bad)
                 }, label: {
                   Label("DeleteButton".localized(), systemImage: "minus.circle")
                 })
