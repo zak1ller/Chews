@@ -25,6 +25,7 @@ struct WriteView: View {
     }
     .introspectTabBarController { (UITabBarController) in
       uiTabarController = UITabBarController
+      UITabBarController.tabBar.alpha = 0
     }
     .onAppear {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {

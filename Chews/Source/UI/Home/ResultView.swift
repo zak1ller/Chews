@@ -18,6 +18,7 @@ struct ResultView: View {
   @State private var showingFinishAlert = false
   @State private var selectedIndex = 0
   @State private var showingPointEditView = false
+  @State private var showingPointAddView = false
   
   var body: some View {
     VStack {
@@ -31,6 +32,11 @@ struct ResultView: View {
                                                       uiTabarController: $uiTabarController,
                                                       index: selectedIndex),
                      isActive: $showingPointEditView) {
+        EmptyView()
+      }
+      NavigationLink(destination: ResultPointAddView(uiTabarController: $uiTabarController,
+                                                     points: isSelectedGoodPoint ? $goodPoints : $badPoints),
+                     isActive: $showingPointAddView) {
         EmptyView()
       }
     }
@@ -85,7 +91,7 @@ extension ResultView {
             Spacer()
             ZStack {
               Button(action: {
-                print("123")
+                add(pointType: .good)
               }) {
                 HStack {
                   Spacer()
@@ -123,7 +129,7 @@ extension ResultView {
             Spacer()
             ZStack {
               Button(action: {
-                print("123")
+                add(pointType: .bad)
               }) {
                 HStack {
                   Spacer()
@@ -171,6 +177,16 @@ extension ResultView {
               goodPoints: goodPoints,
               badPoints: badPoints)
     firstViewActive = false
+  }
+  
+  func add(pointType: PointType) {
+    switch pointType {
+    case .good:
+      isSelectedGoodPoint = true
+    case .bad:
+      isSelectedGoodPoint = false
+    }
+    showingPointAddView = true
   }
   
   func edit(_ i: Int, pointType: PointType) {

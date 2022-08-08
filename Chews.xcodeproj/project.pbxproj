@@ -22,6 +22,7 @@
 		7188A4F3289D003900316949 /* TopicRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7188A4F2289D003900316949 /* TopicRow.swift */; };
 		719C79E2289EB7C3002709BF /* ResultPointEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719C79E1289EB7C3002709BF /* ResultPointEditView.swift */; };
 		719C79E4289FF264002709BF /* HistoryPointAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719C79E3289FF264002709BF /* HistoryPointAddView.swift */; };
+		71AB2A6C28A0CF0700CDC72D /* ResultPointAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AB2A6B28A0CF0700CDC72D /* ResultPointAddView.swift */; };
 		71D7C21E289E383400103A36 /* HistoryPointEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D7C21D289E383300103A36 /* HistoryPointEditView.swift */; };
 		71D7C220289E3DC200103A36 /* PointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D7C21F289E3DC200103A36 /* PointType.swift */; };
 		71E2327D2896EC34003DCD0B /* ChewsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E2327C2896EC34003DCD0B /* ChewsApp.swift */; };
@@ -52,6 +53,7 @@
 		7188A4F2289D003900316949 /* TopicRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicRow.swift; sourceTree = "<group>"; };
 		719C79E1289EB7C3002709BF /* ResultPointEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultPointEditView.swift; sourceTree = "<group>"; };
 		719C79E3289FF264002709BF /* HistoryPointAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPointAddView.swift; sourceTree = "<group>"; };
+		71AB2A6B28A0CF0700CDC72D /* ResultPointAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultPointAddView.swift; sourceTree = "<group>"; };
 		71D7C21D289E383300103A36 /* HistoryPointEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPointEditView.swift; sourceTree = "<group>"; };
 		71D7C21F289E3DC200103A36 /* PointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointType.swift; sourceTree = "<group>"; };
 		71E232792896EC34003DCD0B /* Chews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chews.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,6 +109,7 @@
 				7120BB94289B99F3004095ED /* PointRow.swift */,
 				7188A4F0289CF3FF00316949 /* ResultView.swift */,
 				719C79E1289EB7C3002709BF /* ResultPointEditView.swift */,
+				71AB2A6B28A0CF0700CDC72D /* ResultPointAddView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				71E2327F2896EC34003DCD0B /* HomeView.swift in Sources */,
 				714D7CD7289D28C400413387 /* Topic.swift in Sources */,
 				71E2329E28971D1A003DCD0B /* BigButton.swift in Sources */,
+				71AB2A6C28A0CF0700CDC72D /* ResultPointAddView.swift in Sources */,
 				71E2327D2896EC34003DCD0B /* ChewsApp.swift in Sources */,
 				7120BB95289B99F3004095ED /* PointRow.swift in Sources */,
 				7120BB93289B97BA004095ED /* TypeFieldViewModifier.swift in Sources */,

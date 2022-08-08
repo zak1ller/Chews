@@ -10,6 +10,7 @@ import Introspect
 
 struct HomeView: View {
   @State private var showingWriteView = false
+  @State private var uiTabBarController: UITabBarController?
   
   var body: some View {
     NavigationView {
@@ -19,6 +20,12 @@ struct HomeView: View {
         writeButton
       }
       .navigationBarTitleDisplayMode(.inline)
+      .introspectTabBarController { (UITabBarController) in
+        self.uiTabBarController = UITabBarController
+      }
+      .onAppear {
+        self.uiTabBarController?.tabBar.isHidden = false
+      }
     }
   }
 }
