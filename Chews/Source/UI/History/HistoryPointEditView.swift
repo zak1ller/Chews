@@ -9,13 +9,9 @@ import Foundation
 import SwiftUI
 
 struct HistoryPointEditView: View {
-  let point: String
-  let pointType: PointType
-  let index: Int
-  
   @Environment(\.presentationMode) var presentationMode
   
-  @Binding var topic: Topic
+  @Binding var point: Point
   @FocusState private var focused: Bool
   @State private var value = ""
   @State private var errorMessage = "";
@@ -28,7 +24,7 @@ struct HistoryPointEditView: View {
       Spacer()
     }
     .onAppear {
-      value = point
+      value = point.title
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
         self.focused = true
       }
@@ -59,7 +55,7 @@ struct HistoryPointEditView: View {
 
 extension HistoryPointEditView {
   var pointTextField: some View {
-    TextField(point, text: $value, onCommit: {
+    TextField(point.title, text: $value, onCommit: {
       save()
     })
     .focused($focused)
@@ -73,8 +69,8 @@ extension HistoryPointEditView {
       errorMessage = "ContentTooShort".localized()
       showingErrorMessage = true
     } else {
-      topic.editPoint(to: value, pointType: pointType, i: index)
-      self.presentationMode.wrappedValue.dismiss()
+      point.edit(title: value)
+      presentationMode.wrappedValue.dismiss()
     }
   }
 }

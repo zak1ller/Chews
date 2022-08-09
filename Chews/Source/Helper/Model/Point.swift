@@ -24,6 +24,12 @@ extension Point: Identifiable {}
 extension Point: CKRecordConvertible & CKRecordRecoverable {}
 
 extension Point {
+  func edit(title: String) {
+    try! Realm().write {
+      self.title = title
+    }
+  }
+  
   func increaseScore() {
     try! Realm().write {
       if score < 5 {

@@ -16,9 +16,8 @@ struct HistoryDetailView: View {
   @Binding var activeDetailView: Bool
   @State private var showingPointEditView = false
   @State private var showingPointAddView = false
-  @State private var selectedPoint = ""
+  @State private var selectedPoint: Point = Point()
   @State private var selectedPointType: PointType = .good
-  @State private var selectedPointIndex = 0
   @State private var hiddenTrigger = false
   @State private var goodPointScore = ""
   @State private var badPointScore = ""
@@ -26,10 +25,7 @@ struct HistoryDetailView: View {
   var body: some View {
     VStack {
       Spacer().frame(height: 24)
-      NavigationLink(destination: HistoryPointEditView(point: selectedPoint,
-                                                pointType: selectedPointType,
-                                                index: selectedPointIndex,
-                                                topic: $topic),
+      NavigationLink(destination: HistoryPointEditView(point: $selectedPoint),
                      isActive: $showingPointEditView) {
         EmptyView()
       }
@@ -46,6 +42,7 @@ struct HistoryDetailView: View {
       UITabBarController.tabBar.isHidden = true
     }
     .onAppear {
+      topics.removeAll()
       topics = Topic.get()
       updateScore()
     }
@@ -108,7 +105,7 @@ extension HistoryDetailView {
             }
             .contextMenu {
               Button(action: {
-                self.edit(self.topic.goods[i].title, pointType: .good, i: i)
+                self.edit(self.topic.goods[i], pointType: .good, i: i)
               }, label: {
                 Label("EditButton".localized(), systemImage: "square.and.pencil")
               })
@@ -153,7 +150,7 @@ extension HistoryDetailView {
             })
             .contextMenu {
               Button(action: {
-                self.edit(self.topic.bads[i].title, pointType: .bad, i: i)
+                self.edit(self.topic.bads[i], pointType: .bad, i: i)
               }, label: {
                 Label("EditButton".localized(), systemImage: "square.and.pencil")
               })
@@ -191,16 +188,16 @@ extension HistoryDetailView {
     showingPointAddView = true
   }
   
-  func edit(_ point: String, pointType: PointType, i: Int) {
+  func edit(_ point: Point, pointType: PointType, i: Int) {
     selectedPoint = point
     selectedPointType = pointType
-    selectedPointIndex = i
     showingPointEditView = true
   }
   
   func delete(_ point: String, pointType: PointType) {
     topic.deletePoint(point: point, pointType: pointType)
     topics = Topic.get()
+    updateScore()
   }
   
   func updateScore() {

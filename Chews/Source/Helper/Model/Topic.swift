@@ -82,38 +82,39 @@ extension Topic {
   }
   
   func deletePoint(point: String, pointType: PointType) {
-//    try! Realm().write {
-//      switch pointType {
-//      case .good:
-//        var i = 0
-//        for value in goodPoints {
-//          if value == point {
-//            goodPoints.remove(at: i)
-//          } else {
-//            i += 1
-//          }
-//        }
-//      case .bad:
-//        var i = 0
-//        for value in badPoints {
-//          if value == point {
-//            badPoints.remove(at: i)
-//          } else {
-//            i += 1
-//          }
-//        }
-//      }
-//    }
+    try! Realm().write {
+      switch pointType {
+      case .good:
+        var i = 0
+        
+        for value in goods {
+          if value.title == point {
+            goods.remove(at: i)
+          } else {
+            i += 1
+          }
+        }
+      case .bad:
+        var i = 0
+        for value in bads {
+          if value.title == point {
+            bads.remove(at: i)
+          } else {
+            i += 1
+          }
+        }
+      }
+    }
   }
   
   func editPoint(to text: String, pointType: PointType, i: Int) {
-//    try! Realm().write {
-//      switch pointType {
-//      case .good:
-//        goodPoints[i] = text
-//      case .bad:
-//        badPoints[i] = text
-//      }
-//    }
+    try! Realm().write {
+      switch pointType {
+      case .good:
+        goods[i].title = text
+      case .bad:
+        bads[i].title = text
+      }
+    }
   }
 }
