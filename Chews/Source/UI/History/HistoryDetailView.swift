@@ -19,6 +19,9 @@ struct HistoryDetailView: View {
   @State private var selectedPoint = ""
   @State private var selectedPointType: PointType = .good
   @State private var selectedPointIndex = 0
+  @State private var hiddenTrigger = false
+  @State private var goodPointScore = ""
+  @State private var badPointScore = ""
   
   var body: some View {
     VStack {
@@ -44,6 +47,7 @@ struct HistoryDetailView: View {
     }
     .onAppear {
       topics = Topic.get()
+      updateScore()
     }
     .navigationBarTitleDisplayMode(.inline)
     .edgesIgnoringSafeArea(.bottom)
@@ -78,6 +82,9 @@ extension HistoryDetailView {
             Spacer().frame(width: 16)
             Text("GoodPoints".localized())
               .foregroundColor(.appTextSubColor)
+            Spacer().frame(width: 4)
+            Text(goodPointScore)
+              .foregroundColor(.appPointColor)
             Spacer()
             ZStack {
               Button(action: {
@@ -95,7 +102,11 @@ extension HistoryDetailView {
           }
           Spacer().frame(height: 16)
           ForEach(0..<topic.goodPoints.count, id: \.self) { i in
-            TopicRow(point: self.$topic.goodPoints[i])
+            TopicRow(isHistory: true,
+                     point: topic.goodPoints[i],
+                     tappedAction: {
+              self.updateScore()
+            })
               .contextMenu {
                 Button(action: {
                   self.edit(self.topic.goodPoints[i].title, pointType: .good, i: i)
@@ -116,6 +127,9 @@ extension HistoryDetailView {
             Spacer().frame(width: 16)
             Text("BadPoints".localized())
               .foregroundColor(.appTextSubColor)
+            Spacer().frame(width: 4)
+            Text(badPointScore)
+              .foregroundColor(.appPointColor)
             Spacer()
             ZStack {
               Button(action: {
@@ -133,7 +147,11 @@ extension HistoryDetailView {
           }
           Spacer().frame(height: 16)
           ForEach(0..<topic.badPoints.count, id: \.self) { i in
-            TopicRow(point: self.$topic.badPoints[i])
+            TopicRow(isHistory: true,
+                     point: topic.badPoints[i],
+                     tappedAction: {
+              self.updateScore()
+            })
               .contextMenu {
                 Button(action: {
                   self.edit(self.topic.badPoints[i].title, pointType: .bad, i: i)
@@ -184,5 +202,19 @@ extension HistoryDetailView {
   func delete(_ point: String, pointType: PointType) {
     topic.deletePoint(point: point, pointType: pointType)
     topics = Topic.get()
+  }
+  
+  func updateScore() {
+    var value = 0
+    topic.goodPoints.forEach {
+      value += $0.score
+    }
+    goodPointScore = "\(value)"
+    
+    value = 0
+    topic.badPoints.forEach {
+      value += $0.score
+    }
+    badPointScore = "\(value)"
   }
 }

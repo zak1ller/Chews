@@ -9,11 +9,6 @@ import Foundation
 import RealmSwift
 import IceCream
 
-final class Point: Object {
-  @objc dynamic var title = ""
-  @objc dynamic var score = 1
-}
-
 final class Topic: Object {
   @objc dynamic var id: String!
   @objc dynamic var topic = ""
@@ -38,10 +33,12 @@ extension Topic {
     data.topic = topic
     
     for value in goodPoints {
+      value.id = UUID().uuidString
       data.goodPoints.append(value)
     }
     
     for value in badPoints {
+      value.id = UUID().uuidString
       data.badPoints.append(value)
     }
     

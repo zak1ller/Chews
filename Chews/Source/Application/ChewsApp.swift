@@ -31,14 +31,12 @@ struct ChewsApp: App {
       }
       .tabViewStyle(selectedItemColor: Color.appPointColor)
       .onAppear {
-        UINavigationBar.appearance().tintColor = UIColor.white
-        
         // Sync realm cloukit
         syncEngine = SyncEngine(objects: [
           SyncObject(type: Topic.self),
+          SyncObject(type: Point.self)
         ])
-//        application.registerForRemoteNotifications()
-  
+        UINavigationBar.appearance().tintColor = UIColor.white
       }
     }
   }

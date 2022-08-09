@@ -105,10 +105,11 @@ extension ResultView {
           }
           Spacer().frame(height: 16)
           ForEach(0..<goodPoints.count, id: \.self) { i in
-            TopicRow(tappedAction: {
+            TopicRow(isHistory: false,
+                     point: goodPoints[i],
+                     tappedAction: {
               self.updateScore()
-            },
-                     point: self.$goodPoints[i])
+            })
               .contextMenu {
                 Button(action: {
                   self.edit(i, pointType: .good)
@@ -149,9 +150,11 @@ extension ResultView {
           }
           Spacer().frame(height: 16)
           ForEach(0..<badPoints.count, id: \.self) { i in
-            TopicRow(tappedAction: {
+            TopicRow(isHistory: false,
+                     point: badPoints[i],
+                     tappedAction: {
               self.updateScore()
-            } ,point: self.$badPoints[i])
+            })
               .contextMenu {
                 Button(action: {
                   self.edit(i, pointType: .bad)

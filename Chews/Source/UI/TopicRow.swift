@@ -7,12 +7,15 @@
 
 import Foundation
 import SwiftUI
+import RealmSwift
 
 struct TopicRow: View {
-  var tappedAction: (() -> ())?
-                     
-  @Binding var point: Point
+  let isHistory : Bool
+  
+  var point: Point
   @State private var scoreTextValue = ""
+  
+  var tappedAction: (() -> ())?
   
   var body: some View {
     VStack {
@@ -34,13 +37,7 @@ struct TopicRow: View {
     .padding(.horizontal, 16)
     .padding(.bottom, 16)
     .onTapGesture {
-      if point.score < 5 {
-        point.score += 1
-      } else {
-        point.score = 1
-      }
-      scoreTextValue = "\(point.score)"
-      tappedAction?()
+      increaseScore()
     }
   }
 }
@@ -67,5 +64,21 @@ extension TopicRow {
       .foregroundColor(Color.appPointColor)
       .font(.system(size: 12, weight: .medium))
       .padding(.horizontal, 16)
+  }
+}
+
+extension TopicRow {
+  func increaseScore() {
+    if isHistory {
+      point.increaseScore()
+    } else {
+      if point.score < 5 {
+        point.score += 1
+      } else {
+        point.score = 1
+      }
+    }
+    scoreTextValue = "\(point.score)"
+    tappedAction?()
   }
 }
