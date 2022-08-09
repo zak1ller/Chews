@@ -12,8 +12,8 @@ import IceCream
 final class Topic: Object {
   @objc dynamic var id: String!
   @objc dynamic var topic = ""
-  var goodPoints: List<Point> = List<Point>()
-  var badPoints: List<Point> = List<Point>()
+  var goods: List<Point> = List<Point>()
+  var bads: List<Point> = List<Point>()
   @objc dynamic var date: Date = Date()
   @objc dynamic var isDeleted: Bool = false
   
@@ -32,17 +32,17 @@ extension Topic {
     data.id = UUID().uuidString
     data.topic = topic
     
-    for value in goodPoints {
-      value.id = UUID().uuidString
-      data.goodPoints.append(value)
-    }
-    
-    for value in badPoints {
-      value.id = UUID().uuidString
-      data.badPoints.append(value)
-    }
-    
     try! Realm().write {
+      for value in goodPoints {
+        value.id = UUID().uuidString
+        data.goods.append(value)
+      }
+      
+      for value in badPoints {
+        value.id = UUID().uuidString
+        data.bads.append(value)
+      }
+      
       try! Realm().add(data)
     }
   }
@@ -67,14 +67,18 @@ extension Topic {
   }
   
   func addPoint(text: String, pointType: PointType) {
-//    try! Realm().write {
-//      switch pointType {
-//      case .good:
-//        self.goodPoints.append(text)
-//      case .bad:
-//        self.badPoints.append(text)
-//      }
-//    }
+    let point = Point()
+    point.id = UUID().uuidString
+    point.title = text
+    
+    try! Realm().write {
+      switch pointType {
+      case .good:
+        self.goods.append(point)
+      case .bad:
+        self.bads.append(point)
+      }
+    }
   }
   
   func deletePoint(point: String, pointType: PointType) {

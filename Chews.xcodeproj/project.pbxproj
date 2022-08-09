@@ -26,6 +26,7 @@
 		719C79E4289FF264002709BF /* HistoryPointAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719C79E3289FF264002709BF /* HistoryPointAddView.swift */; };
 		71AB2A6C28A0CF0700CDC72D /* ResultPointAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AB2A6B28A0CF0700CDC72D /* ResultPointAddView.swift */; };
 		71B8149E28A2496E00C6AD32 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B8149D28A2496E00C6AD32 /* Point.swift */; };
+		71B814A028A2518B00C6AD32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B8149F28A2518B00C6AD32 /* AppDelegate.swift */; };
 		71D7C21E289E383400103A36 /* HistoryPointEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D7C21D289E383300103A36 /* HistoryPointEditView.swift */; };
 		71D7C220289E3DC200103A36 /* PointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D7C21F289E3DC200103A36 /* PointType.swift */; };
 		71E2327D2896EC34003DCD0B /* ChewsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E2327C2896EC34003DCD0B /* ChewsApp.swift */; };
@@ -61,6 +62,7 @@
 		719C79E3289FF264002709BF /* HistoryPointAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPointAddView.swift; sourceTree = "<group>"; };
 		71AB2A6B28A0CF0700CDC72D /* ResultPointAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultPointAddView.swift; sourceTree = "<group>"; };
 		71B8149D28A2496E00C6AD32 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		71B8149F28A2518B00C6AD32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71D7C21D289E383300103A36 /* HistoryPointEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPointEditView.swift; sourceTree = "<group>"; };
 		71D7C21F289E3DC200103A36 /* PointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointType.swift; sourceTree = "<group>"; };
 		71E232792896EC34003DCD0B /* Chews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chews.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -254,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				71E2327C2896EC34003DCD0B /* ChewsApp.swift */,
+				71B8149F28A2518B00C6AD32 /* AppDelegate.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				71E2327D2896EC34003DCD0B /* ChewsApp.swift in Sources */,
 				7120BB95289B99F3004095ED /* PointRow.swift in Sources */,
 				7120BB93289B97BA004095ED /* TypeFieldViewModifier.swift in Sources */,
+				71B814A028A2518B00C6AD32 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

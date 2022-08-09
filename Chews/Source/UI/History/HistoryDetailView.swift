@@ -101,24 +101,23 @@ extension HistoryDetailView {
             Spacer().frame(width: 16)
           }
           Spacer().frame(height: 16)
-          ForEach(0..<topic.goodPoints.count, id: \.self) { i in
+          ForEach(0..<topic.goods.count, id: \.self) { i in
             TopicRow(isHistory: true,
-                     point: topic.goodPoints[i],
-                     tappedAction: {
+                     point: topic.goods[i]) {
               self.updateScore()
-            })
-              .contextMenu {
-                Button(action: {
-                  self.edit(self.topic.goodPoints[i].title, pointType: .good, i: i)
-                }, label: {
-                  Label("EditButton".localized(), systemImage: "square.and.pencil")
-                })
-                Button(action: {
-                  self.delete(self.topic.goodPoints[i].title, pointType: .good)
-                }, label: {
-                  Label("DeleteButton".localized(), systemImage: "minus.circle")
-                })
-              }
+            }
+            .contextMenu {
+              Button(action: {
+                self.edit(self.topic.goods[i].title, pointType: .good, i: i)
+              }, label: {
+                Label("EditButton".localized(), systemImage: "square.and.pencil")
+              })
+              Button(action: {
+                self.delete(self.topic.goods[i].title, pointType: .good)
+              }, label: {
+                Label("DeleteButton".localized(), systemImage: "minus.circle")
+              })
+            }
           }
           Spacer().frame(height: 24)
         }
@@ -146,24 +145,24 @@ extension HistoryDetailView {
             Spacer().frame(width: 16)
           }
           Spacer().frame(height: 16)
-          ForEach(0..<topic.badPoints.count, id: \.self) { i in
+          ForEach(0..<topic.bads.count, id: \.self) { i in
             TopicRow(isHistory: true,
-                     point: topic.badPoints[i],
+                     point: topic.bads[i],
                      tappedAction: {
               self.updateScore()
             })
-              .contextMenu {
-                Button(action: {
-                  self.edit(self.topic.badPoints[i].title, pointType: .bad, i: i)
-                }, label: {
-                  Label("EditButton".localized(), systemImage: "square.and.pencil")
-                })
-                Button(action: {
-                  self.delete(self.topic.badPoints[i].title, pointType: .bad)
-                }, label: {
-                  Label("DeleteButton".localized(), systemImage: "minus.circle")
-                })
-              }
+            .contextMenu {
+              Button(action: {
+                self.edit(self.topic.bads[i].title, pointType: .bad, i: i)
+              }, label: {
+                Label("EditButton".localized(), systemImage: "square.and.pencil")
+              })
+              Button(action: {
+                self.delete(self.topic.bads[i].title, pointType: .bad)
+              }, label: {
+                Label("DeleteButton".localized(), systemImage: "minus.circle")
+              })
+            }
           }
           Spacer().frame(height: 24)
         }
@@ -206,13 +205,13 @@ extension HistoryDetailView {
   
   func updateScore() {
     var value = 0
-    topic.goodPoints.forEach {
+    topic.goods.forEach {
       value += $0.score
     }
     goodPointScore = "\(value)"
     
     value = 0
-    topic.badPoints.forEach {
+    topic.bads.forEach {
       value += $0.score
     }
     badPointScore = "\(value)"

@@ -7,9 +7,12 @@
 
 import SwiftUI
 import IceCream
+import Foundation
 
 @main
 struct ChewsApp: App {
+  @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+  
   @State private var syncEngine: SyncEngine?
   
   var body: some Scene {
@@ -31,11 +34,6 @@ struct ChewsApp: App {
       }
       .tabViewStyle(selectedItemColor: Color.appPointColor)
       .onAppear {
-        // Sync realm cloukit
-        syncEngine = SyncEngine(objects: [
-          SyncObject(type: Topic.self),
-          SyncObject(type: Point.self)
-        ])
         UINavigationBar.appearance().tintColor = UIColor.white
       }
     }
