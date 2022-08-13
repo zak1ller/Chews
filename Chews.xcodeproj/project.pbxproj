@@ -27,6 +27,12 @@
 		71AB2A6C28A0CF0700CDC72D /* ResultPointAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AB2A6B28A0CF0700CDC72D /* ResultPointAddView.swift */; };
 		71B8149E28A2496E00C6AD32 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B8149D28A2496E00C6AD32 /* Point.swift */; };
 		71B814A028A2518B00C6AD32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B8149F28A2518B00C6AD32 /* AppDelegate.swift */; };
+		71C5B75128A698D500CF48D8 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C5B75028A698D500CF48D8 /* HomeViewModel.swift */; };
+		71C5B75328A69A0200CF48D8 /* WriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C5B75228A69A0200CF48D8 /* WriteViewModel.swift */; };
+		71C5B75528A69DB600CF48D8 /* GoodPointViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C5B75428A69DB600CF48D8 /* GoodPointViewModel.swift */; };
+		71C5B75728A76FD900CF48D8 /* BadPointViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C5B75628A76FD900CF48D8 /* BadPointViewModel.swift */; };
+		71C5B75928A774C400CF48D8 /* ResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C5B75828A774C400CF48D8 /* ResultViewModel.swift */; };
+		71C5B75B28A7865F00CF48D8 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C5B75A28A7865F00CF48D8 /* HistoryViewModel.swift */; };
 		71D7C21E289E383400103A36 /* HistoryPointEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D7C21D289E383300103A36 /* HistoryPointEditView.swift */; };
 		71D7C220289E3DC200103A36 /* PointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D7C21F289E3DC200103A36 /* PointType.swift */; };
 		71E2327D2896EC34003DCD0B /* ChewsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E2327C2896EC34003DCD0B /* ChewsApp.swift */; };
@@ -63,6 +69,12 @@
 		71AB2A6B28A0CF0700CDC72D /* ResultPointAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultPointAddView.swift; sourceTree = "<group>"; };
 		71B8149D28A2496E00C6AD32 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		71B8149F28A2518B00C6AD32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		71C5B75028A698D500CF48D8 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		71C5B75228A69A0200CF48D8 /* WriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewModel.swift; sourceTree = "<group>"; };
+		71C5B75428A69DB600CF48D8 /* GoodPointViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodPointViewModel.swift; sourceTree = "<group>"; };
+		71C5B75628A76FD900CF48D8 /* BadPointViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadPointViewModel.swift; sourceTree = "<group>"; };
+		71C5B75828A774C400CF48D8 /* ResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewModel.swift; sourceTree = "<group>"; };
+		71C5B75A28A7865F00CF48D8 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		71D7C21D289E383300103A36 /* HistoryPointEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPointEditView.swift; sourceTree = "<group>"; };
 		71D7C21F289E3DC200103A36 /* PointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointType.swift; sourceTree = "<group>"; };
 		71E232792896EC34003DCD0B /* Chews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chews.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +149,19 @@
 			path = History;
 			sourceTree = "<group>";
 		};
+		71C5B74F28A698C700CF48D8 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				71C5B75028A698D500CF48D8 /* HomeViewModel.swift */,
+				71C5B75228A69A0200CF48D8 /* WriteViewModel.swift */,
+				71C5B75428A69DB600CF48D8 /* GoodPointViewModel.swift */,
+				71C5B75628A76FD900CF48D8 /* BadPointViewModel.swift */,
+				71C5B75828A774C400CF48D8 /* ResultViewModel.swift */,
+				71C5B75A28A7865F00CF48D8 /* HistoryViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
 		71E232702896EC34003DCD0B = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +214,7 @@
 		71E2328B2896ECA7003DCD0B /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				71C5B74F28A698C700CF48D8 /* View Model */,
 				71E2328F2896ED15003DCD0B /* View Modifier */,
 				71E2328E2896ED0E003DCD0B /* Custom View */,
 				71E2328D2896ECC2003DCD0B /* Model */,
@@ -386,19 +412,25 @@
 				710744892897BA9000609041 /* GoodPointView.swift in Sources */,
 				719C79E2289EB7C3002709BF /* ResultPointEditView.swift in Sources */,
 				71E232942896EEFD003DCD0B /* ColorExtension.swift in Sources */,
+				71C5B75B28A7865F00CF48D8 /* HistoryViewModel.swift in Sources */,
 				71D7C220289E3DC200103A36 /* PointType.swift in Sources */,
+				71C5B75528A69DB600CF48D8 /* GoodPointViewModel.swift in Sources */,
 				7188A4F3289D003900316949 /* TopicRow.swift in Sources */,
 				71D7C21E289E383400103A36 /* HistoryPointEditView.swift in Sources */,
 				710744872897AB1700609041 /* WriteView.swift in Sources */,
 				714D7CDA289D2B6600413387 /* HistoryView.swift in Sources */,
 				714D7CDE289D33F400413387 /* HistoryDetailView.swift in Sources */,
 				719C79E4289FF264002709BF /* HistoryPointAddView.swift in Sources */,
+				71C5B75928A774C400CF48D8 /* ResultViewModel.swift in Sources */,
 				71E2327F2896EC34003DCD0B /* HomeView.swift in Sources */,
 				714D7CD7289D28C400413387 /* Topic.swift in Sources */,
 				71E2329E28971D1A003DCD0B /* BigButton.swift in Sources */,
 				71AB2A6C28A0CF0700CDC72D /* ResultPointAddView.swift in Sources */,
 				71B8149E28A2496E00C6AD32 /* Point.swift in Sources */,
+				71C5B75128A698D500CF48D8 /* HomeViewModel.swift in Sources */,
 				71E2327D2896EC34003DCD0B /* ChewsApp.swift in Sources */,
+				71C5B75728A76FD900CF48D8 /* BadPointViewModel.swift in Sources */,
+				71C5B75328A69A0200CF48D8 /* WriteViewModel.swift in Sources */,
 				7120BB95289B99F3004095ED /* PointRow.swift in Sources */,
 				7120BB93289B97BA004095ED /* TypeFieldViewModifier.swift in Sources */,
 				71B814A028A2518B00C6AD32 /* AppDelegate.swift in Sources */,

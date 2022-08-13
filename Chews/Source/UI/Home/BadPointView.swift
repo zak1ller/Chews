@@ -9,15 +9,7 @@ import Foundation
 import SwiftUI
 
 struct BadPointView: View {
-  var topic: String
-  @Binding var goodPoints: [Point]
-  @Binding var firstViewActive: Bool
-  @State var latestCount = 0
-  @State private var badPointValue = ""
-  @State private var badPoints: [Point] = []
-  @State private var errorMessage = ""
-  @State private var showingErrorMessage = false
-  @State private var showingResultView = false
+  @ObservedObject var viewModel: BadPointViewModel
   @FocusState private var focused: Bool
   
   var body: some View {
@@ -33,18 +25,17 @@ struct BadPointView: View {
     .padding(.trailing, 16)
     .onAppear {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
-        self.focused = true
+        focused = true
       }
     }
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
-        NavigationLink(destination: ResultView(topic: topic,
-                                               firstViewActive: $firstViewActive,
-                                               goodPoints: $goodPoints,
-                                               badPoints: $badPoints),
-                       isActive: $showingResultView) {
+        NavigationLink(destination: ResultView(viewModel: ResultViewModel(topic: viewModel.topic,
+                                                                          goodPoints: viewModel.goodPoints,
+                                                                          badPoints: viewModel.badPoints)),
+                       isActive: $viewModel.showingResultView) {
           Button(action: {
-            next()
+            viewModel.next()
           }) {
             Text("NextButton".localized())
               .foregroundColor(.appPointColor)
@@ -52,13 +43,13 @@ struct BadPointView: View {
         }
       }
     }
-    .alert("AlertTitle".localized(), isPresented: $showingErrorMessage, actions: {
+    .alert("AlertTitle".localized(), isPresented: $viewModel.showingErrorMessage, actions: {
       Button("ConfirmButton".localized(), role: .cancel) {
-        showingErrorMessage = false
+        viewModel.showingErrorMessage = false
         focused = true
       }
     }, message: {
-      Text(errorMessage)
+      Text(viewModel.errorMessage)
     })
   }
 }
@@ -71,8 +62,8 @@ extension BadPointView {
   }
   
   var badPointTextField: some View {
-    TextField(topic, text: $badPointValue, onCommit: {
-      enter()
+    TextField(viewModel.topic, text: $viewModel.badPointValue, onCommit: {
+      focused = viewModel.enter()
     })
     .focused($focused)
     .typeFieldStyle()
@@ -82,48 +73,25 @@ extension BadPointView {
     ScrollViewReader{ proxy in
       ScrollView(.vertical, showsIndicators: false) {
         VStack {
-          ForEach(0..<badPoints.count, id: \.self) { i in
-            PointRow(point: "\(self.badPoints[i].title)") {
-              self.badPoints.remove(at: i)
+          ForEach(0..<viewModel.badPoints.count, id: \.self) { i in
+            PointRow(point: "\(viewModel.badPoints[i].title)") {
+              self.viewModel.badPoints.remove(at: i)
             }
             .id(i)
           }
         }
-        .onChange(of: badPoints.count) { count in
-          if latestCount < count {
+        .onChange(of: viewModel.badPoints.count) { count in
+          if viewModel.latestCount < count {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
               withAnimation {
                 proxy.scrollTo(count - 1)
               }
             }
           }
-          self.latestCount = count
+          viewModel.latestCount = count
         }
       }
     }
   }
 }
-
-extension BadPointView {
-  func enter() {
-    if badPointValue.count == 0 {
-      errorMessage = "ContentTooShort".localized()
-      showingErrorMessage = true
-    } else {
-      let point = Point()
-      point.title = badPointValue
-      badPoints.append(point)
-      badPointValue = ""
-      focused = true
-    }
-  }
   
-  func next() {
-    if badPoints.isEmpty {
-      errorMessage = "BadPointEmptyMessage".localized()
-      showingErrorMessage = true
-    } else {
-      showingResultView = true
-    }
-  }
-}

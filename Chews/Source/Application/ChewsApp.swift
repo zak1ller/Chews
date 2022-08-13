@@ -25,12 +25,14 @@ struct ChewsApp: App {
               .foregroundColor(.appPointColor)
             Text("TabBarItemWrite".localized())
           }
+          .environmentObject(HomeViewModel())
         HistoryView()
           .tabItem {
             Image(systemName: "clock")
               .foregroundColor(.appPointColor)
             Text("TabBarItemHistory".localized())
           }
+          .environmentObject(HistoryViewModel(topics: Topic.get()))
       }
       .tabViewStyle(selectedItemColor: Color.appPointColor)
       .onAppear {

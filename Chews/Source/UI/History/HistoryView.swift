@@ -10,11 +10,7 @@ import SwiftUI
 import Introspect
 
 struct HistoryView: View {
-  @State private var topics = Topic.get()
-  @State private var showingDetail = false
-  @State private var selectedTopic: Topic = Topic()
-  @State private var selectedIndex: Int = 0
-  @State private var uiTabBarController: UITabBarController?
+  @EnvironmentObject var viewModel: HistoryViewModel
   
   var body: some View {
     NavigationView {
@@ -22,14 +18,15 @@ struct HistoryView: View {
         listView
       }
       .onAppear {
-        self.uiTabBarController?.tabBar.isHidden = false
-        self.topics = Topic.get()
+        viewModel.uiTabBarController?.tabBar.isHidden = false
+//        self.topics = Topic.get()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2, execute: {
-          self.topics = Topic.get()
+          // iCloud 동기화
+          viewModel.topics = Topic.get()
         })
       }
       .introspectTabBarController { (UITabBarController) in
-        self.uiTabBarController = UITabBarController
+        viewModel.uiTabBarController = UITabBarController
       }
       .navigationTitle("TabBarItemHistory".localized())
       .navigationBarTitleDisplayMode(.large)
@@ -40,14 +37,14 @@ struct HistoryView: View {
 extension HistoryView {
   var listView: some View {
     ScrollView(.vertical) {
-      NavigationLink(destination: HistoryDetailView(topic: $selectedTopic,
-                                                    topics: $topics,
-                                                    activeDetailView: $showingDetail),
-                     isActive: $showingDetail) {
+      NavigationLink(destination: HistoryDetailView(topic: $viewModel.selectedTopic,
+                                                    topics: $viewModel.topics,
+                                                    activeDetailView: $viewModel.showingDetailView),
+                     isActive: $viewModel.showingDetailView) {
         
       }
       Spacer().frame(height: 24)
-      ForEach(topics) { topic in
+      ForEach(viewModel.topics) { topic in
         HistoryRow(topic: topic)
           .background(Color.appBackgroundColor)
           .onTapGesture {
@@ -60,7 +57,7 @@ extension HistoryView {
 
 extension HistoryView {
   func openDetailView(topic: Topic) {
-    self.selectedTopic = topic
-    self.showingDetail = true
+    viewModel.selectedTopic = topic
+    viewModel.showingDetailView = true
   }
 }

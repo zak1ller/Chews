@@ -9,8 +9,7 @@ import SwiftUI
 import Introspect
 
 struct HomeView: View {
-  @State private var showingWriteView = false
-  @State private var uiTabBarController: UITabBarController?
+  @EnvironmentObject var viewModel: HomeViewModel
   
   var body: some View {
     NavigationView {
@@ -21,10 +20,10 @@ struct HomeView: View {
       }
       .navigationBarTitleDisplayMode(.inline)
       .introspectTabBarController { (UITabBarController) in
-        self.uiTabBarController = UITabBarController
+        viewModel.uiTabBarController = UITabBarController
       }
       .onAppear {
-        self.uiTabBarController?.tabBar.isHidden = false
+        viewModel.uiTabBarController?.tabBar.isHidden = false
       }
     }
   }
@@ -44,10 +43,10 @@ extension HomeView {
   var writeButton: some View {
     HStack {
       Spacer().frame(width: 16)
-      NavigationLink(destination: WriteView(firstViewActive: $showingWriteView),
-                     isActive: $showingWriteView) {
+      NavigationLink(destination: WriteView(),
+                     isActive: $viewModel.shwoingWriteView) {
         BigButton(title: "HomeViewContentTitle".localized(), tappedAction: {
-          self.showingWriteView = true
+          viewModel.shwoingWriteView = true
         })
       }
       Spacer().frame(width: 16)

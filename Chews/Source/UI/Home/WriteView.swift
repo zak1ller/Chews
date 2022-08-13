@@ -10,12 +10,8 @@ import SwiftUI
 import Introspect
 
 struct WriteView: View {
-  @Binding var firstViewActive: Bool
   @FocusState private var focused: Bool
-  @State private var topic = ""
-  @State private var errorMessage = ""
-  @State private var showingErrorMessage = false
-  @State private var showingGoodPointView = false
+  @StateObject private var viewModel = WriteViewModel()
   
   var body: some View {
     VStack(alignment: .center) {
@@ -32,11 +28,10 @@ struct WriteView: View {
     }
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
-        NavigationLink(destination: GoodPointView(topic: topic,
-                                                  firstViewActive: $firstViewActive),
-                       isActive: $showingGoodPointView) {
+        NavigationLink(destination: GoodPointView(viewModel: GoodPointViewModel(topic: viewModel.topic)),
+                       isActive: $viewModel.showingGoodPointView) {
           Button(action: {
-            next()
+            viewModel.next()
           }) {
             Text("NextButton".localized())
               .foregroundColor(.appPointColor)
@@ -44,13 +39,13 @@ struct WriteView: View {
         }
       }
     }
-    .alert("AlertTitle".localized(), isPresented: $showingErrorMessage, actions: {
+    .alert("AlertTitle".localized(), isPresented: $viewModel.showingErrorMessage, actions: {
       Button("ConfirmButton".localized(), role: .cancel) {
-        showingErrorMessage = false
+        viewModel.showingErrorMessage = false
         focused = true
       }
     }, message: {
-      Text(errorMessage)
+      Text(viewModel.errorMessage)
     })
     .navigationTitle(Text("WriteTitle".localized()))
     .padding(.leading, 16)
@@ -65,24 +60,10 @@ extension WriteView {
   }
   
   var topicTextField: some View {
-    TextField("WriteViewTopicExample".localized(), text: $topic, onCommit: {
-      next()
+    TextField("WriteViewTopicExample".localized(), text: $viewModel.topic, onCommit: {
+      viewModel.next()
     })
       .focused($focused)
       .typeFieldStyle()
-  }
-}
-
-extension WriteView {
-  func next() {
-    if topic.count == 0 {
-      errorMessage = "AddViewShortTopicMessage".localized()
-      showingErrorMessage = true
-    } else if topic.count > 50 {
-      errorMessage = "AddViewLongTopicMessage".localized()
-      showingErrorMessage = true
-    } else {
-      showingGoodPointView = true
-    }
   }
 }

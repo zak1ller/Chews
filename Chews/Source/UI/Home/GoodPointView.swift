@@ -10,15 +10,8 @@ import SwiftUI
 import Introspect
 
 struct GoodPointView: View {
-  var topic: String
-  @Binding var firstViewActive: Bool
+  @ObservedObject var viewModel: GoodPointViewModel
   @FocusState private var focused: Bool
-  @State var latestCount = 0
-  @State private var goodPointValue = ""
-  @State private var errorMessage = ""
-  @State private var showingErrorMessage = false
-  @State private var showingBadPointView = false
-  @State private var goodPoints: [Point] = []
   
   var body: some View {
     VStack {
@@ -33,17 +26,16 @@ struct GoodPointView: View {
     .padding(.trailing, 16)
     .onAppear {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
-        self.focused = true
+        focused = true
       }
     }
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
-        NavigationLink(destination: BadPointView(topic: topic,
-                                                 goodPoints: $goodPoints,
-                                                 firstViewActive: $firstViewActive),
-                       isActive: $showingBadPointView) {
+        NavigationLink(destination: BadPointView(viewModel: BadPointViewModel(topic: viewModel.topic,
+                                                                              goodPoints: viewModel.goodPoints)),
+                       isActive: $viewModel.showingBadPointView) {
           Button(action: {
-            next()
+            focused = viewModel.next()
           }) {
             Text("NextButton".localized())
               .foregroundColor(.appPointColor)
@@ -51,13 +43,12 @@ struct GoodPointView: View {
         }
       }
     }
-    .alert("AlertTitle".localized(), isPresented: $showingErrorMessage, actions: {
+    .alert("AlertTitle".localized(), isPresented: $viewModel.showingErrorMessage, actions: {
       Button("ConfirmButton".localized(), role: .cancel) {
-        showingErrorMessage = false
-        focused = true
+        focused = viewModel.alertConfirmButtonTapped()
       }
     }, message: {
-      Text(errorMessage)
+      Text(viewModel.errorMessage)
     })
   }
 }
@@ -70,8 +61,8 @@ extension GoodPointView {
   }
   
   var goodPointTextField: some View {
-    TextField(topic, text: $goodPointValue, onCommit: {
-      enter()
+    TextField(viewModel.topic, text: $viewModel.goodPointValue, onCommit: {
+      focused = viewModel.enter()
     })
     .focused($focused)
     .typeFieldStyle()
@@ -81,49 +72,24 @@ extension GoodPointView {
     ScrollViewReader{ proxy in
       ScrollView(.vertical, showsIndicators: false) {
         VStack {
-          ForEach(0..<goodPoints.count, id: \.self) { i in
-            PointRow(point: "\(self.goodPoints[i].title)") {
-              self.goodPoints.remove(at: i)
+          ForEach(0..<viewModel.goodPoints.count, id: \.self) { i in
+            PointRow(point: "\(viewModel.goodPoints[i].title)") {
+              viewModel.removePoint(at: i)
             }
             .id(i)
           }
         }
-        .onChange(of: goodPoints.count) { count in
-          if latestCount < count {
+        .onChange(of: viewModel.goodPoints.count) { count in
+          if viewModel.latestCount < count {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
               withAnimation {
                 proxy.scrollTo(count - 1)
               }
             }
           }
-          self.latestCount = count
+          viewModel.latestCount = count
         }
       }
-    }
-  }
-}
-
-extension GoodPointView {
-  func enter() {
-    if goodPointValue.count == 0 {
-      errorMessage = "ContentTooShort".localized()
-      showingErrorMessage = true
-    } else {
-      let point = Point()
-      point.title = goodPointValue
-      
-      goodPoints.append(point)
-      goodPointValue = ""
-      focused = true
-    }
-  }
-  
-  func next() {
-    if goodPoints.isEmpty {
-      errorMessage = "GoodPointsEmptyMessage".localized()
-      showingErrorMessage = true
-    } else {
-      showingBadPointView = true
     }
   }
 }
