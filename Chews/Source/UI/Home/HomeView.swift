@@ -26,6 +26,7 @@ struct HomeView: View {
         viewModel.uiTabBarController?.tabBar.isHidden = false
       }
     }
+    .navigationViewStyle(.stack)
   }
 }
 

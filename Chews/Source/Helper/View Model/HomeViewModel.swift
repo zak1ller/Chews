@@ -9,6 +9,6 @@ import Foundation
 import SwiftUI
 
 final class HomeViewModel: ObservableObject {
+  var uiTabBarController: UITabBarController?
   @Published var shwoingWriteView = false
-  @Published var uiTabBarController: UITabBarController?
 }

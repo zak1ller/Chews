@@ -9,10 +9,11 @@ import Foundation
 import SwiftUI
 
 final class HistoryViewModel: ObservableObject {
+  var uiTabBarController: UITabBarController?
+  
   @Published var topics: [Topic]
   @Published var showingDetailView = false
   @Published var selectedTopic: Topic = Topic()
-  @Published var uiTabBarController: UITabBarController?
   
   init(topics: [Topic]) {
     self.topics = topics

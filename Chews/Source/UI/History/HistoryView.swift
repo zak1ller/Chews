@@ -11,19 +11,15 @@ import Introspect
 
 struct HistoryView: View {
   @EnvironmentObject var viewModel: HistoryViewModel
-  
+ 
   var body: some View {
     NavigationView {
       VStack {
         listView
       }
       .onAppear {
+        viewModel.topics = Topic.get()
         viewModel.uiTabBarController?.tabBar.isHidden = false
-//        self.topics = Topic.get()
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2, execute: {
-          // iCloud 동기화
-          viewModel.topics = Topic.get()
-        })
       }
       .introspectTabBarController { (UITabBarController) in
         viewModel.uiTabBarController = UITabBarController
@@ -31,33 +27,26 @@ struct HistoryView: View {
       .navigationTitle("TabBarItemHistory".localized())
       .navigationBarTitleDisplayMode(.large)
     }
+    .navigationViewStyle(.stack)
   }
 }
 
 extension HistoryView {
   var listView: some View {
     ScrollView(.vertical) {
-      NavigationLink(destination: HistoryDetailView(topic: $viewModel.selectedTopic,
-                                                    topics: $viewModel.topics,
-                                                    activeDetailView: $viewModel.showingDetailView),
+      NavigationLink(destination: HistoryDetailView(viewModel: HistoryDetailViewModel(topic: $viewModel.selectedTopic,
+                                                                                      activeDetailView: $viewModel.showingDetailView)),
                      isActive: $viewModel.showingDetailView) {
-        
+        EmptyView()
       }
       Spacer().frame(height: 24)
       ForEach(viewModel.topics) { topic in
         HistoryRow(topic: topic)
           .background(Color.appBackgroundColor)
           .onTapGesture {
-            openDetailView(topic: topic)
+            viewModel.openDetailView(topic: topic)
           }
       }
     }
-  }
-}
-
-extension HistoryView {
-  func openDetailView(topic: Topic) {
-    viewModel.selectedTopic = topic
-    viewModel.showingDetailView = true
   }
 }

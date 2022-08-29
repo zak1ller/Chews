@@ -20,13 +20,7 @@ struct PointRow: View {
         Button(action: {
           self.deleteButtonTappedAction?()
         }) {
-          Circle()
-            .foregroundColor(.red)
-            .overlay {
-              Image(systemName: "minus")
-                .foregroundColor(.white)
-                .font(.system(size: 16))
-            }
+         deleteButton
         }
         .frame(width: 24, height: 24)
       }
@@ -48,5 +42,15 @@ extension PointRow {
       .padding(.trailing, 16)
       .padding(.top, 8)
       .padding(.bottom, 8)
+  }
+  
+  var deleteButton: some View {
+    Circle()
+      .foregroundColor(.appTextSubColor)
+      .overlay {
+        Image(systemName: "minus")
+          .foregroundColor(.appBackgroundColor)
+          .font(.system(size: 16))
+      }
   }
 }

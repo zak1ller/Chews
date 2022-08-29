@@ -9,14 +9,8 @@ import Foundation
 import SwiftUI
 
 struct HistoryPointAddView: View {
-  let pointType: PointType
-  
+  @StateObject var viewModel: HistoryPointAddViewModel
   @Environment(\.presentationMode) var presentationMode
-  
-  @Binding var topic: Topic
-  @State private var value = ""
-  @State private var errorMessage = "";
-  @State private var showingErrorMessage = false
   @FocusState private var focused: Bool
   
   var body: some View {
@@ -33,20 +27,21 @@ struct HistoryPointAddView: View {
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         Button(action: {
-          add()
+          viewModel.add()
+          presentationMode.wrappedValue.dismiss()
         }) {
           Text("DoneButton".localized())
             .foregroundColor(.appPointColor)
         }
       }
     }
-    .alert("AlertTitle".localized(), isPresented: $showingErrorMessage, actions: {
+    .alert("AlertTitle".localized(), isPresented: $viewModel.showingErrorMessage, actions: {
       Button("ConfirmButton".localized(), role: .cancel) {
-        showingErrorMessage = false
+        viewModel.showingErrorMessage = false
         focused = true
       }
     }, message: {
-      Text(errorMessage)
+      Text(viewModel.errorMessage)
     })
     .padding(.horizontal, 16)
     .navigationTitle(Text("AddTitle".localized()))
@@ -55,22 +50,12 @@ struct HistoryPointAddView: View {
 
 extension HistoryPointAddView {
   var textField: some View {
-    TextField("", text: $value, onCommit: {
-      add()
+    TextField("", text: $viewModel.value, onCommit: {
+      viewModel.add()
+      presentationMode.wrappedValue.dismiss()
     })
     .focused($focused)
     .typeFieldStyle()
   }
 }
 
-extension HistoryPointAddView {
-  func add() {
-    if value.isEmpty {
-      errorMessage = "ContentTooShort".localized()
-      showingErrorMessage = true
-    } else {
-      topic.addPoint(text: value, pointType: pointType)
-      self.presentationMode.wrappedValue.dismiss()
-    }
-  }
-}

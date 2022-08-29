@@ -10,12 +10,8 @@ import SwiftUI
 
 struct HistoryPointEditView: View {
   @Environment(\.presentationMode) var presentationMode
-  
-  @Binding var point: Point
+  @StateObject var viewModel: HistoryPointEditViewModel
   @FocusState private var focused: Bool
-  @State private var value = ""
-  @State private var errorMessage = "";
-  @State private var showingErrorMessage = false
   
   var body: some View {
     VStack {
@@ -24,7 +20,7 @@ struct HistoryPointEditView: View {
       Spacer()
     }
     .onAppear {
-      value = point.title
+      viewModel.value = viewModel.point.title
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
         self.focused = true
       }
@@ -32,20 +28,21 @@ struct HistoryPointEditView: View {
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {
         Button(action: {
-          save()
+          viewModel.save()
+          presentationMode.wrappedValue.dismiss()
         }) {
           Text("SaveButton".localized())
             .foregroundColor(.appPointColor)
         }
       }
     }
-    .alert("AlertTitle".localized(), isPresented: $showingErrorMessage, actions: {
+    .alert("AlertTitle".localized(), isPresented: $viewModel.showingErrorMessage, actions: {
       Button("ConfirmButton".localized(), role: .cancel) {
-        showingErrorMessage = false
+        viewModel.showingErrorMessage = false
         focused = true
       }
     }, message: {
-      Text(errorMessage)
+      Text(viewModel.errorMessage)
     })
     .navigationTitle(Text("EditTitle".localized()))
     .padding(.leading, 16)
@@ -55,22 +52,11 @@ struct HistoryPointEditView: View {
 
 extension HistoryPointEditView {
   var pointTextField: some View {
-    TextField(point.title, text: $value, onCommit: {
-      save()
+    TextField(viewModel.point.title, text: $viewModel.value, onCommit: {
+      viewModel.save()
+      presentationMode.wrappedValue.dismiss()
     })
     .focused($focused)
     .typeFieldStyle()
-  }
-}
-
-extension HistoryPointEditView {
-  func save() {
-    if value.isEmpty {
-      errorMessage = "ContentTooShort".localized()
-      showingErrorMessage = true
-    } else {
-      point.edit(title: value)
-      presentationMode.wrappedValue.dismiss()
-    }
   }
 }
